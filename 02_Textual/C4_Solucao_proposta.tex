@@ -1,0 +1,82 @@
+
+
+
+\chapter{Solução Proposta}\label{chap:Uma Teoria de Design para um Tutor de Gêneros Científicos}
+
+
+
+Este capítulo especifica a solução como uma teoria de design, organizada segundo os oito componentes anatômicos de \cite{DesignTheory}. O propósito dessa organização é duplo: descrever o artefato e, simultaneamente, produzir conhecimento de design generalizável.
+
+\section{Propósito e escopo}
+
+O artefato tem por propósito apoiar autores em início de carreira a produzir manuscritos conformes às convenções de gênero da trilha-alvo, reduzindo a rejeição editorial precoce por inadequação de gênero e tornando explícito um conhecimento hoje tácito. Seu escopo de aplicabilidade compreende contextos em que exista uma comunidade científica com gêneros estáveis, um corpus de instâncias aceitas suficiente para caracterizar o gênero, e um insumo textual estruturável. O artefato destina-se ao apoio formativo, mantendo o revisor humano no processo decisório; não pretende substituir o juízo de mérito nem automatizar decisões editoriais.
+
+\section{Construtos}
+
+Os construtos fundamentais e sua ancoragem teórica são: gênero comunicativo e repertório/sistema de gêneros \cite{GenresOrgComm,GenreSystems}; move retórico \cite{GenreAnalysis}; especificação de gênero, entendida como a representação computável das regularidades de uma trilha derivada do corpus; conformidade de gênero, o grau de aderência de uma instância a essa especificação; diagnóstico acionável, o retorno que aponta um desvio específico e sua correção esperada; e enculturação acadêmica, o processo de internalização dos gêneros pela comunidade.
+
+\section{Princípios de forma e função}
+
+O artefato organiza-se como um pipeline em três estágios, espelhando a separação clássica de um compilador. No estágio de parsing, cada instância do corpus é convertida em uma representação intermediária estruturada, capturando elementos de forma (estrutura de seções, moves, métricas) e marcadores de substância. No estágio de agregação, os registros são combinados deterministicamente para produzir a especificação de gênero da trilha. No estágio de verificação e diagnóstico, um manuscrito submetido é convertido e comparado à especificação da trilha-alvo, gerando diagnósticos; no modo tutor, acrescentam-se o roteamento entre trilhas e a orientação formativa.
+
+Desses princípios de forma e função derivam cinco princípios de design (DP), que constituem o núcleo generalizável da contribuição:
+
+- DP1 — Modelar antes de avaliar. Construir a especificação do gênero-alvo antes de avaliar qualquer instância.
+- DP2 — Separar extração de raciocínio. Caracterizar o gênero por agregação determinística sobre extrações por instância, e não por raciocínio holístico de uma LLM sobre o corpus inteiro, garantindo reprodutibilidade e auditabilidade.
+- DP3 — Diagnóstico referenciado ao alvo. Expressar todo retorno como desvio em relação a uma especificação explícita e versionável, e não como julgamento de qualidade absoluta.
+- DP4 — Conformidade como consciência, não imposição. Tornar a convenção visível para que o autor decida segui-la ou rompê-la deliberadamente, mitigando o risco de engessamento da escrita.
+- DP5 — Alocação de recurso por natureza da tarefa. Destinar tarefas procedimentais e repetitivas a modelos locais e o raciocínio complexo a modelos comerciais.
+
+% > [Figura 3 — Arquitetura de referência em duas fases]
+% > Melhor local para inserção: nesta seção, após a apresentação dos princípios de forma e função. Diagrama do pipeline: Fase A (corpus → conversão → extração local → agregação → base de conhecimento por trilha) e Fase B (manuscrito → mesma conversão/extração → verificação pelo modelo forte → relatório/tutor). Substitui e amplia a "Figura 1. Arquitetura de Referência" do desenho original.
+% > 
+% > Figura 3. Arquitetura de referência do artefato, em duas fases. Elaboração própria.
+
+\section{Os agentes especializados e o orquestrador}
+
+O estágio de verificação e diagnóstico é realizado por agentes especializados, herdados e ampliados a partir do desenho original, agora subordinados à especificação de gênero.
+
+O Agente de Verificação de Referências verifica a existência e a validade das referências, consultando Semantic Scholar e CrossRef, e identifica referências não localizadas e inconsistências. Por envolver consultas repetitivas e estruturadas, executa em modelo mistral \cite{mistral} em ambiente local , reduzindo custos.
+
+O Agente de Verificação de Novidade avalia a originalidade da contribuição frente à literatura, em três etapas: extração das alegações de contribuição, recuperação e ranqueamento de trabalhos relacionados, e análise comparativa com o estado da arte, inspirando-se no pipeline de raciocínio estruturado de DeepReview \cite{DeepReview}.
+
+O Agente de Verificação de Confiabilidade examina a coerência interna e o rigor metodológico por meio de uma cadeia de evidências, percorrendo verificação metodológica, verificação experimental e análise abrangente, coletando evidências textuais e atribuindo níveis de confiança a cada fragilidade.
+
+O Agente Orquestrador coordena a execução dos demais, consolida as avaliações parciais, resolve contradições e produz o relatório final. É também o orquestrador que confronta o manuscrito com a especificação da trilha-alvo (DP3) e, no modo tutor, executa o roteamento de gênero.
+
+\section{Modo revisor e modo tutor}
+
+O artefato opera em dois modos sobre o mesmo núcleo. No modo revisor, produz um relatório de diagnóstico: resumo do trabalho, análise de novidade, verificação de confiabilidade com evidências, validação de referências, pontos fortes e fracos e recomendações acionáveis, todos referenciados à especificação da trilha. No modo tutor, acrescenta duas funções voltadas à formação: a orientação explícita sobre como aproximar o manuscrito do gênero-alvo e o roteamento de gênero — a indicação da trilha cujo perfil melhor se ajusta ao manuscrito, classificando a instância dentro do repertório de gêneros da conferência. Essa segunda função, possível apenas porque o escopo abrange todas as trilhas do SBSI, ataca uma das causas mais frequentes de rejeição precoce: o bom artigo submetido à trilha errada.
+
+\section{Mutabilidade do artefato}
+
+A teoria prevê mutabilidade em três eixos, o que constitui força e não limitação. Como os gêneros mudam com a comunidade, a especificação de cada trilha deve ser re-derivável a cada edição da conferência. Novas trilhas ou uma nova conferência entram como novas especificações, sem rearquitetar o sistema. E o mesmo núcleo serve aos modos revisor e tutor, demonstrando variação de função sem mudança de forma.
+
+\section{Proposições testáveis}
+
+As proposições que o estudo de avaliação buscará examinar são apresentadas na Tabela \ref{tab:proposicoes}.
+
+Tabela de Proposições testáveis da teoria de design.
+
+\begin{table}[H]
+\centering
+\caption{Proposições}
+\label{tab:proposicoes}
+\small
+\begin{tabular}{l p{11.5cm}}
+\toprule
+Código & Proposição \\
+\midrule
+P1 & Manuscritos orientados pelo modo tutor apresentam maior conformidade de gênero à trilha-alvo do que suas versões originais. \\
+P2 & Os desvios de conformidade apontados pelo artefato correlacionam-se com motivos reais de rejeição precoce observados na comunidade. \\
+P3 & Há convergência parcial entre a avaliação de conformidade do artefato e a percepção de revisores humanos experientes da trilha. \\
+P4 & O retorno referenciado ao alvo é percebido como mais acionável do que o retorno de qualidade genérico. \\
+P5 & O roteamento de gênero classifica corretamente a trilha mais adequada a um manuscrito em taxa superior ao acaso. \\
+P6 & A separação entre extração e agregação produz especificações reprodutíveis a custo linear no tamanho do corpus. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Conhecimento justificador e instanciação expositiva}
+
+O conhecimento justificador da teoria de design compõe-se das três camadas do Capítulo 2: a Teoria de Gêneros como kernel sociotécnica; a análise de moves como ponte de operacionalização; e a teoria de compiladores como justificação computacional da arquitetura. A instanciação expositiva é o protótipo aplicado ao corpus completo do SBSI, descrito no Capítulo 5, que cumpre o papel de demonstrar a viabilidade da teoria e servir de base empírica para as proposições da Tabela \ref{tab:proposicoes}..

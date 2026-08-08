@@ -1,0 +1,239 @@
+\documentclass[12pt, oneside, a4paper]{book}
+
+%----INICIO PACKAGES----%
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel} % linguagem do documento
+\AtBeginDocument{\renewcommand{\bibname}{References}}
+\usepackage[a4paper,left=3.0cm,right=3.0cm,top=2.5cm,bottom=2.5cm]{geometry} % definição das margens
+\usepackage{setspace} % habilitando o espaço entre linhas
+\usepackage{titlesec}
+\usepackage{mathptmx}
+\usepackage[utf8]{inputenc}
+\usepackage[normalem]{ulem} % habilitando palavras sublinhadas
+\usepackage{amssymb,amsmath,pxfonts,exscale} % permite símbolos matemáticos
+\usepackage{pslatex}
+\usepackage{mathrsfs} % permite uso de fontes para conjuntos
+\usepackage{graphicx} % permite inserção de figuras
+\usepackage[titletoc,title]{appendix}
+
+
+\usepackage[export]{adjustbox}
+
+\usepackage{algorithmic}% pacote para uso na definição do ambiente para algoritmos
+\usepackage{framed}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{hyperref}
+\usepackage{xr}
+\usepackage{color} % para colocar alguns flags de cor no texto
+\usepackage[mathcal]{euler}
+\usepackage{mathptmx}
+\usepackage[most]{tcolorbox}
+\usepackage{subfigure}
+\usepackage{cite}% Mudar a referência de () para []
+\usepackage[resetlabels,labeled]{multibib}
+\usepackage{acronym} % acronyms
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{amstext} % for \text macro
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{mathtools}
+\usepackage{ucs}
+\usepackage{textcomp}
+\usepackage{silence}
+\usepackage{setspace,lipsum}
+\usepackage{bookmark}
+\usepackage{verbatim}
+\usepackage{pdflscape}
+%\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{svg}
+\usepackage{multirow}
+%\usepackage{lastpage}
+\usepackage{lastpage}
+%\usepackage[titles]{tocloft}
+\usepackage{tocbasic}
+
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, fit, backgrounds, arrows.meta}
+
+
+%loutfi
+\usepackage{csquotes}
+\usepackage{pdfpages}
+
+\renewcommand{\quote}{\list{}{\rightmargin=0cm\leftmargin=4cm\topsep=0pt}\item\relax}
+
+\newenvironment{loutfirecuo}{\begin{quoting}[rightmargin=0cm,leftmargin=1cm]\vspace{-3mm}\footnotesize\singlespacing }{\end{quoting}}
+
+\newenvironment{loutfiquote}{\begin{quote}\begin{singlespace}\footnotesize}{\end{singlespace}\end{quote}}
+
+%------------2019--------------------
+
+
+\DeclareTOCStyleEntry[
+  entrynumberformat=\entrynumberwithprefix{\textbf{\figurename}},
+  dynnumwidth,
+  numsep=1em
+]{tocline}{figure}
+
+\DeclareTOCStyleEntry[
+  entrynumberformat=\entrynumberwithprefix{\textbf{\tablename}},
+  dynnumwidth,
+  numsep=1em
+]{tocline}{table}
+
+\newcommand\entrynumberwithprefix[2]{\textbf{#1\enspace #2:\hfill}}
+
+%\DeclareTOCStyleEntry[indent=0pt]{default}{chapter}
+\DeclareTOCStyleEntry[indent=0pt,entryformat=\bfseries]{tocline}{section}
+\DeclareTOCStyleEntry[indent=0pt]{default}{subsection}
+\DeclareTOCStyleEntry[indent=0pt]{default}{subsubsection}
+\DeclareTOCStyleEntry[indent=0pt]{default}{paragraph}
+
+
+
+% Para Tabelas
+\usepackage{float}
+\usepackage[normal]{threeparttable}
+\usepackage[table]{colortbl}
+
+\def\stoptable#1{%
+   \hline\endtabular\par\vspace{\abovecaptionskip}%
+   {\footnotesize #1}%
+   \endminipage}
+
+
+% Listas
+\usepackage{enumitem}
+
+\newenvironment{tight_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+}{\end{enumerate}}
+
+%ABNT Cite
+\usepackage[alf, 
+            bibjustif, 
+            abnt-etal-list=5, 
+            abnt-etal-cite=2,
+            abnt-emphasize=bf,
+            abnt-etal-text=it,
+            abnt-repeated-author-omit=no]{abntex2cite}
+
+
+%------------------------------------------------------------------------------
+% Formatação
+%------------------------------------------------------------------------------
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\linespread{1.0} % espaço entre linhas de 1.5
+\setlength{\parskip}{10pt} % espaço entre parágrafos
+\setcounter{secnumdepth}{4} % habilita a variável \thesubsubsection
+\setcounter{tocdepth}{4} % Índice até subsubsection
+
+\titleformat{\chapter}[hang]{\fontsize{16}{16}\normalfont\bfseries\filleft\selectfont}{\thechapter.\hspace{3pt}~}{0pt}{\normalfont\bfseries}
+\titlespacing{\chapter}{0pt}{5pt}{10pt}
+\titleformat{\section}[hang]{\fontsize{12}{12}\normalfont\bfseries\selectfont}{\thesection\hspace{3pt}~}{0pt}{\normalfont\bfseries}
+\titlespacing{\section}{0pt}{24pt}{12pt}
+\titleformat{\subsection}[hang]{\fontsize{12}{12}\normalfont\bfseries\selectfont}{\thesubsection\hspace{3pt}~}{0pt}{\normalfont\bfseries}
+\titlespacing{\subsection}{0pt}{12pt}{6pt}
+\titleformat{\subsubsection}[hang]{\fontsize{12}{12}\normalfont\bfseries\selectfont}{\thesubsubsection\hspace{3pt}~}{0pt}{\normalfont\bfseries}
+\titlespacing{\subsubsection}{0pt}{6pt}{3pt}
+\titleformat{\paragraph}[hang]{\fontsize{12}{12}\normalfont\bfseries\selectfont}{\theparagraph\hspace{3pt}~}{0pt}{\normalfont\bfseries\hspace*{3pt}}
+\titlespacing{\paragraph}{0pt}{6pt}{3pt}
+
+%------------------------------------------------------------------------------
+% Chamadas Código Principal
+%------------------------------------------------------------------------------
+
+%
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+%
+
+\newcommand{\addappendix}{%
+  \section*{\appendixname}% start the appendix
+  \addcontentsline{toc}{section}{\textbf{\appendixname}}% add it to the toc
+  \counterwithin*{figure}{section}% optional, if you want to reset the figure counter
+  \stepcounter{section}% reset counters related to section
+  \renewcommand{\thesection}{\textbf{A}}% we want A
+  \renewcommand{\thefigure}{\textbf{\section.\arabic{figure}}}% optional
+}
+
+\usepackage[labelfont=bf]{caption}
+\counterwithout{figure}{subsubsection}
+\counterwithout{figure}{subsection}
+\counterwithout{figure}{section}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{subsubsection}
+\counterwithout{table}{subsection}
+\counterwithout{table}{section}
+\counterwithout{table}{chapter}
+
+% Código principal onde são chamados as várias seções ou capítulos que compõem a dissertação.
+
+\begin{document}\clearpage
+    \input{01_Pre_Textual/A_Capa} 
+    \input{01_Pre_Textual/B_Folha_de_Aprovacao} \input{01_Pre_Textual/C_Ficha_Catalografica} 
+    \pagestyle{plain} 
+    \pagenumbering{roman} 
+    \input{01_Pre_Textual/D_Dedicatoria} 
+    \input{01_Pre_Textual/E_Agradecimento} 
+    % \input{01_Pre_Textual/G_Memorial} 
+    \input{01_Pre_Textual/H_Resumo} 
+    \input{01_Pre_Textual/I_Abstract}
+            
+    \tableofcontents
+    \listoffigures
+    \listoftables
+    \newpage
+    \input{01_Pre_Textual/j_Indice_de_nomenclaturas}
+    %\input{01_Pre_Textual/I_Indice_de_Siglas}
+	
+ \pagestyle{plain}% headings como argumento coloca o cabeçalho
+	\pagenumbering{arabic}
+    \setcounter{page}{1}
+    
+    %Inserir novo capíulo aqui. Um arquivo por linha
+    \input{02_Textual/C1_Introducao}
+    \input{02_Textual/C2_Fundamentacao}
+    \input{02_Textual/C3_Levantamento_Literatura}
+    \input{02_Textual/C4_solucao_proposta}
+    \input{02_Textual/C5_Construcao_artefato}
+    \input{02_Textual/C6_Metodo_avaliacao}
+    \input{02_Textual/C7_Cronograma}
+    \input{02_Textual/C8_Resultados_parciais}
+    %\input{02_Textual/C3_Metodologia}
+    %\input{02_Textual/C4_Cenarios}
+    %\input{02_Textual/C5_Resultados}
+    %\input{02_Textual/C6_Discussao}
+    %\input{02_Textual/C7_Conclusao}
+    % \input{02_Textual/Uso_da_IA}
+    \input{03_Pos_Textual/A_Bibliografia}
+    %\newpage
+	%\thispagestyle{empty}
+    %\mbox{}
+    
+    %Formatação do título dos apêndices (NÃO MEXER)
+    \titleformat{\chapter}[display]
+        {\normalfont\huge\bfseries\centering}{\centering\chaptertitlename\ \thechapter}{20pt}{\large}
+        \titlespacing*{\chapter}{0pt}{50pt}{40pt}
+    
+    % \appendix
+    % %Inserir novo apêndice aqui. Um arquivo por linha
+    % \include{03_Pos_Textual/1_Apendice}
+    % \include{03_Pos_Textual/2_Apendice}
+    
+\end{document}

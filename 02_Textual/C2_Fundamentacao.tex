@@ -1,0 +1,107 @@
+
+
+\chapter{Fundamentação Teórica}\label{chap:fundamentacao}
+
+
+Este capítulo estabelece o arcabouço conceitual da pesquisa. O argumento central é que a revisão científica não é a aplicação de critérios universais de qualidade, mas a verificação da conformidade de um manuscrito às convenções de um gênero comunicativo estabelecido por uma comunidade. Desse argumento decorrem três camadas teóricas — o fenômeno, sua operacionalização e a justificação da arquitetura — integradas pelo método DSR.
+
+\section{Teoria de Gêneros aplicada a Sistemas de Informação}
+
+A base do trabalho é a Teoria de Gêneros na tradição dos gêneros como ação social. \cite{GenresOrgComm} definem um gênero comunicativo como um padrão recorrente de comunicação, reconhecido por uma comunidade, caracterizado por regularidades de \textbf{forma} (estrutura, formato, elementos esperados) e de \textbf{substância} (conteúdo, propósito comunicativo). Um gênero não é uma convenção arbitrária: é um recurso social que institucionaliza normas de interação e cujo domínio é condição de pertencimento à comunidade que o pratica.
+
+Para o escopo desta pesquisa adota a conferência inteira, com suas múltiplas trilhas, é decisivo o conceito de \textbf{repertório de gêneros} \cite{GenreRepertoire}  mostram que uma comunidade não mobiliza um gênero isolado, mas um conjunto inter-relacionado de gêneros, e que esse repertório funciona como um poderoso modelo social que molda como, por que e com que efeito os membros interagem. Trabalho posterior estende a noção para \textbf{sistemas de gêneros}, sequências inter-relacionadas de ações comunicativas \cite{GenreSystems}. A transposição para o objeto desta pesquisa é direta: Uma conferência como um todo, constitui um sistema de gêneros; cada trilha é um (sub)gênero com convenções próprias; cada manuscrito submetido é uma instância que pode estar bem ou mal-formada em relação ao gênero que reivindica pertencer; e a rejeição editorial precoce é a sanção da comunidade a uma instância que viola as regularidades esperadas frequentemente uma incompatibilidade de gênero, quando o autor escreve conforme um gênero e submete a uma trilha que espera outro.
+
+Esse enquadramento tem uma consequência importante para o propósito do artefato. O problema do novo pesquisador, na linguagem da teoria, é o de ainda não haver internalizado o repertório de gêneros de sua comunidade, internalização que ocorre por enculturação, tipicamente lenta e tácita. O artefato proposto é conceitualmente, um instrumento que acelera e explicita essa enculturação, o que constitui uma contribuição de natureza teórica, e não apenas tecnológica.
+
+\input{FIGURAS/IMG/TeoriaDeGeneros.tex}
+% > **[Figura 1 — Do sistema de gêneros à instância]**
+% > *Melhor local para inserção: ao final da Seção 2.1. Diagrama conceitual mostrando o SBSI como sistema de gêneros, as trilhas como subgêneros, e um manuscrito como instância avaliada quanto à conformidade. A legenda vai abaixo da figura, conforme a norma.*
+% > 
+% > Figura 1. Relação entre sistema de gêneros (conferência), gêneros (trilhas) e instância (manuscrito submetido). Elaboração própria.
+
+\section{Análise de \textbf{moves} retóricos: a ponte para a operacionalização}
+
+A Teoria de Gêneros fornece o porquê sociotécnico, mas é abstrata demais para orientar diretamente a implementação. A ponte entre o construto abstrato e o texto observável é a análise de \textbf{moves} retóricos, na tradição da escrita acadêmica de \cite{GenreAnalysis}. O modelo CARS (\textbf{Create a Research Space}) decompõe a introdução de artigos científicos em movimentos retóricos recorrentes: estabelecer o território (situar a relevância e revisar a literatura), estabelecer o nicho (apontar a lacuna ou o problema) e ocupar o nicho (anunciar a contribuição e a organização do trabalho).
+
+A importância desse modelo para a pesquisa é dupla. Primeiro, os \textbf{moves} são a manifestação observável e mensurável do gênero abstrato: onde \cite{GenresOrgComm} falam de regularidades de forma e substância, \cite{GenreAnalysis} oferece o microscópio que as torna visíveis no texto. Segundo, os \textbf{moves} são operacionalizáveis por processamento de linguagem natural, o que fornece precedente metodológico para sua extração automatizada. A articulação, portanto, é a seguinte: a Teoria de Gêneros define o construto de Sistemas de Informação; a análise de \textbf{moves} operacionaliza esse construto em unidades observáveis; 
+%e o extrator do artefato (Capítulo 5) detecta essas unidades em cada artigo.
+
+\section{Teoria de compiladores como conhecimento justificador}
+
+A arquitetura do artefato inspira-se na teoria de compiladores \cite{Compilers}, aqui empregada não como teoria de Sistemas de Informação, mas como conhecimento justificador (kernel theory) de natureza computacional, no sentido que o método DSR atribui a esse componente. Um compilador não avalia se um programa é "bom" em abstrato; ele verifica a conformidade de um programa a uma especificação de linguagem e produz diagnósticos acionáveis, indicando onde e como a instância se desvia do esperado. A correspondência com o artefato é sistemática, conforme resume a Tabela \ref{tab:compilador-genero}.
+
+Tabela 1. Correspondência entre a teoria de compiladores (kernel), o artefato proposto e o fenômeno de gênero.
+
+\begin{table}[H]
+\centering
+\caption{Correspondência entre compilador e teoria de gêneros}
+\label{tab:compilador-genero}
+\small
+\begin{tabular}{|l|l|l|}
+\hline
+Compilador & Artefato proposto & Fenômeno (Teoria de Gêneros) \\
+\hline
+Especificação da linguagem & Base de conhecimento da trilha & O gênero da trilha \\
+Análise léxica e sintática & Verificação estrutural do manuscrito & Forma do gênero / \textit{moves} \\
+Análise semântica & Agentes de novidade e confiabilidade & Substância do gênero \\
+Tabela de símbolos & Registros estruturados agregados & Regularidades empíricas \\
+Diagnósticos & Relatório acionável / orientação do tutor & Retorno de enculturação \\
+Separação front-end / back-end & Modelo local / modelo comercial & Estratégia híbrida de LLMs \\
+\hline
+\end{tabular}
+\end{table}
+
+A adoção de compiladores como kernel resolve uma tensão epistemológica típica de uma banca: a de que a teoria de Sistemas de Informação do trabalho poderia não estar clara. A resposta é explícita — a teoria de Sistemas de Informação é a Teoria de Gêneros; a teoria de compiladores é o conhecimento computacional que justifica por que a arquitetura de verificação-e-diagnóstico deve funcionar, conforme o próprio DSR prescreve o uso de kernel theories de disciplinas de referência \cite{SystemDesignTheory,DesignTheory}
+%(WALLS; WIDMEYER; EL SAWY, 1992; GREGOR; JONES, 2007).
+
+\section{Design Science Research e a anatomia da teoria de design}
+%(HEVNER et al., 2004; PEFFERS et al., 2007)
+O trabalho adota o método Design Science Research \cite{Hevner2004,Peffers2007}, que orienta a construção e a avaliação de artefatos como forma de produção de conhecimento. Mais do que produzir um artefato, esta pesquisa pretende produzir uma \textbf{teoria de design}, no sentido de \cite{DesignTheory}, cuja anatomia prevê oito componentes: propósito e escopo; construtos; princípios de forma e função; mutabilidade do artefato; proposições testáveis; conhecimento justificador; princípios de implementação; e instanciação expositiva. 
+%Essa anatomia estrutura o Capítulo 4 e é o que permite que a contribuição transcenda o protótipo específico do SBSI, elevando-a a um conjunto de princípios generalizáveis — condição para a evolução do trabalho rumo a uma tese de doutorado.
+
+\input{FIGURAS/IMG/IntegradorTeorias.tex}
+
+% > **[Figura 2 — Quadro integrador das três teorias]**
+% > *Melhor local para inserção: ao final do Capítulo 2, como síntese. Diagrama em três camadas (Teoria de Gêneros → análise de moves → teoria de compiladores) dentro da moldura do DSR, cada camada associada à pergunta que responde (o quê / como medir / por que funciona) e ao estágio correspondente do artefato.*
+% > 
+% > Figura 2. Integração das três camadas teóricas sob o método DSR. Elaboração própria.
+
+
+
+% ------------------------------------------------------------------------------------------------------------
+
+% \section{Contextualization}
+
+% Entanglement Theories seek to understand the phenomena that emerge from interactions between humans and non-humans \cite{frauenberger2019entanglement}. LAKS JJKSF JSJKSD ssk sdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsj. Table \ref{tab:fontes_incerteza_tar} presents bla blab alb al.
+
+% \begin{table}[ht!]
+% \centering
+% \scriptsize
+% \caption{Sources of Uncertainty in ANT.}
+% \rowcolors{3}{gray!10}{white}
+% \begin{tabular}{p{0.19\textwidth} p{0.32\textwidth} p{0.40\textwidth}}
+% \toprule
+% \textbf{Soursdfsinty} & \textbf{Descsdfsdtion} & \textbf{Impliss} \\
+% \midrule
+
+% No Groxxdfsup vesdfsdfsdation: & Groups asdfdfsfsdfsdvisional assemblages. & The researcher must empiricasdfsdfsdfsdsd transformed within networks. \\
+
+% Isolated sdfsdfsd  fsd f & sdfsd fsdf sdf sd fsddf sd sdfs fsdf dssd fs fsfsdfd sds dfsd fs. & sf sd fdf ds fds fsd sdfdsf sdf sd fsd fsd sdf sd. \\
+
+% Human s jfsf sdfsd human Agency & sdj fskjf jkfskjfsdjksdfks jkfdsjks fjks sfkdfssfdkksskdkssdk. & sjf sdkjfsdf kjskjfsjffsfsfsdfsdfsdjkfj fkf kjs fdkfskfskfskjskjfsfsk. \\
+
+% sd fljkfsdjk fsdjkfsdjkfsdjkfsdkjsfdkjs & s dfjksfjksfjk sdfjksd jksjksjkfskd sdk sksksksksk. & sdjkf sdjkfsfkjsdfkj sdjkfkssfkfsdkjfsdkksfksds. \\
+
+% \bottomrule
+% \end{tabular}
+% \label{tab:fontes_incerteza_tar}
+% \caption*{\textbf{Source:} Author's elaboration.}
+% \end{table}
+
+
+
+
+% The first source of uncertainty \cite[pp.~27-42]{latour2005reassembling} statkba jkdajb dakb jadjkbkadjb ajkbdajkmation, the researcher cannot simply rely on fixed categories such as ``society,'' ``organization,'' or ``users'' as starting points. It becomes necessary to observe how sfk jsfkjsd fjks fjkssfgroupings.
+
+% The second source of uncertainty \cite[pp.~44-62]{latour2005reassembling} concerns the nature of action: action is always distributed. There is no isolated agent or clear point of origin, since ev
+% This way of thinking about action profoundly transforms how we investigate social and technical phenomena. If action is always distributed, the researcher can no longer attribute it to a single agent such as a person, an institution, or a technology. Instead, it becomes necessary to trace the trajectory of the action and observe how it is produced by a network of heterogeneous elements that operate together. This requires close attention to detail: which tools were used, which norms were involved, which interpretations were mobilized, and which artifacts intervened. Agency ceases to be something that someone possesses and becomes something that occurs among many.

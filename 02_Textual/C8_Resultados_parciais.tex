@@ -1,0 +1,20 @@
+
+
+
+\chapter{Resultados Parciais}\label{chap:Resultados Parciais}
+
+% Este capítulo posiciona a proposta frente a duas frentes de literatura: os sistemas de revisão científica assistida por LLMs e as ferramentas de extração estruturada de documentos científicos.
+
+% \section{Revisão científica assistida por agentes e LLMs}
+
+% Investigações recentes exploram o papel de agentes baseados em LLMs no processo de revisão por pares. O framework AgentReview utiliza agentes para simular as interações entre autores, revisores e editores, permitindo investigar fatores sociológicos e organizacionais que influenciam decisões editoriais, e evidenciando a viabilidade de arquiteturas multiagentes para tarefas avaliativas (JIN et al., 2024). Na geração automática de pareceres, o método MARG (*Multi-Agent Review Generation*) propõe múltiplos agentes especializados que analisam diferentes aspectos do artigo, como experimentos, clareza e impacto (D'ARCY et al., 2024).
+
+% Avanços posteriores aprofundam a qualidade das revisões por meio de raciocínio estruturado em múltiplos estágios. O framework DeepReview emula o processo de revisores especialistas, com verificação de novidade, avaliação multidimensional e verificação de confiabilidade, enfatizando que o objetivo não é substituir o revisor humano, mas explorar o potencial de assistência das LLMs (ZHU et al., 2025). Em contrapartida, estudos empíricos revelam vulnerabilidades desses sistemas: Li et al. (2025) propõem um framework de perturbação multinível guiado por aspectos para diagnosticar sistematicamente as fraquezas de LLMs na revisão automatizada.
+
+% Em conjunto, esses trabalhos sugerem que agentes de IA podem desempenhar papel relevante no apoio à produção científica, mas evidenciam limitações que precisam ser consideradas no projeto de arquiteturas multiagentes. Persistem lacunas quanto à adaptação dessas tecnologias a contextos editoriais específicos, sobretudo fora do eixo das grandes conferências internacionais. A presente proposta distingue-se dessa literatura em dois aspectos: primeiro, ao deslocar o objetivo de avaliar a *qualidade absoluta* para verificar a *conformidade a um gênero-alvo*, o que ataca diretamente a rejeição precoce; segundo, ao fundamentar essa verificação em uma modelagem explícita e auditável do gênero da trilha, e não apenas no raciocínio implícito de um modelo.
+
+% \section{Extração estruturada de documentos científicos}
+
+% O método proposto depende de converter cada PDF em uma representação estruturada antes de qualquer raciocínio por LLM. Nesse domínio, duas famílias de ferramentas recentes voltadas a pipelines de IA generativa, como o Docling (AUER et al., 2024), toolkit de código aberto que converte PDF e outros formatos em representação estruturada unificada, com modelos especializados de análise de layout e reconhecimento de tabelas, e que preserva figuras e tabelas. Como se detalha no Capítulo 5, este trabalho adota o Docling, por operar inteiramente em ambiente Python, preservar elementos visuais relevantes para a caracterização de gênero e oferecer melhor suporte ao pós-processamento de textos em português, complementando-o com consultas às APIs CrossRef e Semantic Scholar para o tratamento de referências.
+
+% Para a recuperação semântica, adota-se o modelo de *embeddings* BGE-M3 (CHEN et al., 2024), multilíngue, com forte desempenho em português, capaz de recuperação densa e esparsa e de processar contextos de até 8.192 tokens — características adequadas a um corpus em língua portuguesa e passíveis de execução local.

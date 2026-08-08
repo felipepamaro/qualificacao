@@ -1,0 +1,39 @@
+
+
+
+\chapter{Método de Construção do Artefato}\label{chap:Método de Construção do Artefato}
+
+Este capítulo detalha os princípios de implementação (PI) da teoria de design, isto é, como, em processo, o artefato é construído. A estratégia central responde a uma questão prática: como analisar, de forma eficiente, todos os artigos de uma conferência. O princípio que a orienta é o de que a LLM nunca processa o corpus inteiro de uma só vez; em vez disso, realiza uma passagem barata por artigo, e a construção do perfil da conferência torna-se um problema de agregação determinística sobre os registros resultantes.
+
+\section{Visão geral: duas fases}
+% , conforme a Figura 3. A Fase A,
+O método divide-se em duas fases,A Aase A executada uma vez por conferência, é offline e de baixo custo: constrói a base de conhecimento de gênero. A Fase B, executada a cada manuscrito submetido, é a única em que o modelo comercial é acionado. Essa separação faz com que o custo de analisar uma conferência inteira seja dominado por operações locais, tornando o processamento do corpus completo economicamente viável.
+
+\section{PI1 — Conversão estruturada}
+
+Cada PDF é convertido em representação estruturada pelo Docling \cite{Docling}. Utilizando um conversor desenvolvido no âmbito deste trabalho, que configura o pipeline com reconhecimento óptico para português e inglês, preserva figuras e tabelas e aplica correções de artefatos de acentuação típicos de PDFs gerados em LaTeX. recurso especialmente relevante para o corpus brasileiro. Além do formato textual (Markdown), exporta-se a representação estruturada do documento (dicionário tipado em JSON), preservando a segmentação de seções e a tipagem de elementos (cabeçalhos, tabelas, figuras), da qual o estágio seguinte extrai atributos sem recorrer a expressões regulares sobre texto plano.
+
+\section{PI2 — Extração por instância em modelo local}
+
+Para cada artigo, produz-se um registro estruturado (JSON) validado por esquema (Pydantic). A extração combina dois tipos de atributo. Os determinísticos — estrutura de seções presentes, número de referências, de figuras, de tabelas, de páginas que são obtidos diretamente da representação estruturada. Os interpretativos, detecção dos moves CARS, classificação do tipo de contribuição (por exemplo, design science, survey, estudo de caso, experimento), presença de questão de pesquisa explícita  são delegados ao modelo local Mistral 7B \cite{mistral}, seção a seção, com saída restrita ao esquema. A padronização de cabeçalhos (mapeando variações como "Introdução", "1. Introdução" e "1 Introduction" a rótulos canônicos) assegura consistência à agregação. As referências, isoladas da seção correspondente, são convertidas em registros estruturados e enriquecidas via CrossRef e Semantic Scholar, suprindo a ausência do GROBID.
+
+\section{PI3 — Agregação determinística}
+
+Sobre o conjunto de registros, calculam-se as regularidades do gênero por trilha, sem LLM: distribuição dos tipos de contribuição, estrutura modal de seções, faixas típicas (medianas e quartis do número de referências e de páginas) e frequência de elementos (por exemplo, o percentual de artigos com questão de pesquisa explícita). Esse conjunto de estatísticas constitui a especificação de gênero da trilha, a "especificação da linguagem", no vocabulário da kernel de compiladores. Por ser estatística pura, é reprodutível e auditável, propriedade valiosa para a validação científica do trabalho.
+
+\section{PI4 — Síntese e verificação pelo modelo forte}
+
+Somente na Fase B, e em poucas chamadas, aciona-se o modelo comercial. Na revisão de um manuscrito, a especificação da trilha-alvo é injetada no contexto do modelo, que verifica a conformidade do registro do manuscrito, identifica desvios historicamente associados à rejeição precoce e gera orientações. É importante notar que, por ser a especificação de gênero um objeto estruturado e compacto, sua consulta pelo modelo dispensa, na maior parte dos casos, uma base vetorial: o perfil da trilha cabe integralmente no contexto. A recuperação semântica (RAG) é reservada a necessidades específicas, discutidas a seguir.
+
+\section{Bases de conhecimento e o papel do RAG}
+
+O trabalho distingue três repositórios de conhecimento, evitando um equívoco comum — o de tratar toda base de conhecimento como recuperação vetorial. O primeiro é a base teórica, um índice sobre a literatura de gêneros e escrita científica, para consulta conceitual, caso clássico de RAG \cite{RAG}. O segundo é o índice do corpus, sobre os artigos da conferência, com filtragem por metadados (trilha, seção, tipo de contribuição) oriundos do PI2, que serve ao Agente de Novidade e à recuperação de exemplares por trilha. O terceiro é a camada estruturada, as estatísticas de gênero do PI3, que não é recuperação vetorial: os padrões quantitativos de gênero são calculados por agregação determinística, não derivados por similaridade. Para a recuperação semântica dos dois primeiros, adota-se o BGE-M3 \cite{BGEM3}.
+
+\section{PI5 e PI6 — Versionamento e orquestração}
+
+Cada especificação de trilha é tratada como artefato versionado por edição da conferência (PI5), sustentando a mutabilidade descrita na Seção 4.6. A orquestração multiagente (PI6) mapeia os agentes da Seção 4.4 sobre os estágios do pipeline. Toda chamada a modelos de linguagem, locais ou comerciais, é intermediada por uma camada única de abstração (biblioteca litellm), o que materializa o princípio DP5: a alocação entre modelo local e comercial reduz-se a uma decisão de configuração, favorecendo a reprodutibilidade e a documentação das escolhas de design.
+
+% > [Figura 4 — Esquema do registro estruturado por artigo]
+% > Melhor local para inserção: ao final da Seção 5.3. Representação do esquema (campos determinísticos e interpretativos) que cada artigo gera, evidenciando os moves CARS e os atributos de gênero. Pode ser apresentada como figura ou como quadro; se quadro, o título vai acima.
+% > 
+% > Figura 4. Esquema do registro estruturado extraído por artigo. Elaboração própria.

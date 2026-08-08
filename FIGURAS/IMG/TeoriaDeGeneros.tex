@@ -1,0 +1,44 @@
+% --- Preâmbulo (uma vez, junto aos outros \usepackage) ---
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    >={Stealth[round]},
+    font=\small,
+    trilha/.style={draw, rounded corners, align=center,
+                   minimum width=2.8cm, minimum height=1.2cm, fill=gray!5},
+    alvo/.style={trilha, very thick},              % gênero-alvo: borda mais grossa
+    instancia/.style={draw, rounded corners, align=center,
+                      minimum width=3.6cm, minimum height=1.1cm, fill=gray!12},
+    rotulo/.style={font=\footnotesize\itshape}
+  ]
+
+    % --- Gêneros (trilhas) ---
+    \node[trilha] (t1) {Trilha A\\{\footnotesize gênero}};
+    \node[alvo,   right=0.8cm of t1] (t2) {Trilha B\\{\footnotesize gênero-alvo}};
+    \node[trilha, right=0.8cm of t2] (t3) {Trilha C\\{\footnotesize gênero}};
+
+    % --- Contêiner: sistema de gêneros (SBSI) ---
+    \begin{scope}[on background layer]
+      \node[draw, dashed, rounded corners, fill=gray!2,
+            fit=(t1)(t2)(t3), inner sep=16pt] (sistema) {};
+    \end{scope}
+    \node[anchor=north west, font=\bfseries]
+      at ([shift={(4pt,-1pt)}]sistema.north west) {Sistema de Gêneros};
+
+    % --- Instância (manuscrito) ---
+    \node[instancia, below=2.6cm of t2] (ms) {Manuscrito submetido\\{\footnotesize instância}};
+
+    % --- Verificação de conformidade ao gênero-alvo ---
+    \draw[->, thick] (ms) -- (t2)
+      node[midway, right=2pt, rotulo] {verificação de conformidade};
+
+    % --- Roteamento de gênero (qual trilha melhor se ajusta) ---
+    \draw[->, dashed, gray] (ms.north west) to[bend left=12] (t1.south);
+    \draw[->, dashed, gray] (ms.north east) to[bend right=12] (t3.south);
+    \node[rotulo, gray, left=0.1cm of t1.west, anchor=east] {roteamento};
+
+  \end{tikzpicture}
+  \caption{Relação entre sistema de gêneros (conferência), gêneros (trilhas) e instância (manuscrito submetido). Elaboração própria.}
+  \label{fig:sistema-generos}
+\end{figure}

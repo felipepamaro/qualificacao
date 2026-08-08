@@ -1,0 +1,51 @@
+% --- Preâmbulo (já incluídos para a Figura 1) ---
+% \usepackage{tikz}
+% \usetikzlibrary{positioning, fit, backgrounds, arrows.meta}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    >={Stealth[round]},
+    font=\small,
+    teoria/.style={draw, rounded corners, align=left,
+                   text width=6.2cm, inner sep=8pt, minimum height=1.7cm},
+    lateral/.style={draw, rounded corners, align=left, fill=gray!4,
+                    text width=3.0cm, inner sep=8pt, minimum height=1.7cm},
+    nivel/.style={font=\footnotesize},
+    setinha/.style={->, thick, gray}
+  ]
+
+    % --- Camada 1: fenômeno ---
+    \node[teoria, fill=violet!8] (t1)
+      {\textbf{Teoria de Gêneros}\\[2pt]{\footnotesize Yates e Orlikowski}\\{\footnotesize \emph{fenômeno de SI}}};
+    \node[lateral, right=0.7cm of t1] (l1)
+      {\textbf{o quê?}\\[2pt]{\footnotesize $\rightarrow$ base de conhecimento}};
+
+    % --- Camada 2: operacionalização ---
+    \node[teoria, fill=teal!10, below=0.8cm of t1] (t2)
+      {\textbf{Análise de moves --- Swales}\\[2pt]{\footnotesize modelo CARS}\\{\footnotesize \emph{operacionalização}}};
+    \node[lateral, right=0.7cm of t2] (l2)
+      {\textbf{como medir?}\\[2pt]{\footnotesize $\rightarrow$ extração por artigo}};
+
+    % --- Camada 3: arquitetura (kernel) ---
+    \node[teoria, fill=orange!12, below=0.8cm of t2] (t3)
+      {\textbf{Teoria de compiladores}\\[2pt]{\footnotesize kernel computacional}\\{\footnotesize \emph{justificação da arquitetura}}};
+    \node[lateral, right=0.7cm of t3] (l3)
+      {\textbf{por que funciona?}\\[2pt]{\footnotesize $\rightarrow$ verificação e tutor}};
+
+    % --- Setas entre as camadas ---
+    \draw[setinha] (t1) -- (t2);
+    \draw[setinha] (t2) -- (t3);
+
+    % --- Moldura do DSR englobando tudo ---
+    \begin{scope}[on background layer]
+      \node[draw, dashed, rounded corners, fill=gray!2,
+            fit=(t1)(l1)(t3)(l3), inner sep=18pt] (dsr) {};
+    \end{scope}
+    \node[anchor=north west, font=\bfseries]
+      at ([shift={(4pt,-4pt)}]dsr.north west) {Método};
+
+  \end{tikzpicture}
+  \caption{Integração das três camadas teóricas sob o método DSR. Elaboração própria.}
+  \label{fig:integracao-teorias}
+\end{figure}

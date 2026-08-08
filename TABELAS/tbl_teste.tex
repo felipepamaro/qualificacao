@@ -1,0 +1,30 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[ht!]
+\centering
+\caption{Tabela de teste}
+\label{tab:hipotese}
+\resizebox{0.7\textwidth}{!}{%
+\begin{tabular}{l|cc|cc}
+\multirow{3}{*}{\textbf{Dimensão}} &
+  \multicolumn{2}{c|}{\textbf{Teste de   Normalidade}} &
+  \multicolumn{2}{c}{\textbf{Teste de   Inferência}} \\
+                & \multicolumn{2}{c|}{\textbf{(Kolmogorov-Smirnov)}} & \multicolumn{2}{c}{\textbf{(Teste T)}}          \\
+ &
+  \multicolumn{1}{c|}{\textit{\textbf{p-value}}} &
+  \textbf{Interpretação} &
+  \multicolumn{1}{c|}{\textit{\textbf{p-value}}} &
+  \textbf{Interpretação} \\ \hline
+Usabilidade &
+  \multicolumn{1}{c|}{0,48} &
+  \multirow{4}{*}{Normal} &
+  \multicolumn{1}{c|}{6,41E-21} &
+  Hipótese Aceita \\
+Experiência     & \multicolumn{1}{c|}{0,72}            &             & \multicolumn{1}{c|}{8,83E-28} & Hipótese Aceita \\
+Aprendizado     & \multicolumn{1}{c|}{0,41}            &             & \multicolumn{1}{c|}{4,03E-29} & Hipótese Aceita \\
+Percepção Geral & \multicolumn{1}{c|}{0,86}            &             & \multicolumn{1}{c|}{2,99E-30} & Hipótese Aceita
+\end{tabular}%
+}
+\caption*{\textbf{Fonte:} Do autor.}
+\end{table}
