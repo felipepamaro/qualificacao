@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+.DS_Store
+*/.DS_Store
+
+
+Modelo_Unirio.aux
+Modelo_Unirio.bbl
+Modelo_Unirio.blg
+Modelo_Unirio.fdb_latexmk
+Modelo_Unirio.fls
+Modelo_Unirio.lof
+Modelo_Unirio.log
+Modelo_Unirio.lot
+Modelo_Unirio.pdf
+Modelo_Unirio.synctex.gz
+Modelo_Unirio.toc
