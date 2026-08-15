@@ -67,6 +67,33 @@
 \usepackage{csquotes}
 \usepackage{pdfpages}
 
+
+% %----- pacote nomenclaturas ----%
+\usepackage{nomencl}
+\makenomenclature
+
+% 1. Remove o título e a entrada no sumário
+\renewcommand{\nomname}{}
+
+% 2. Redefine para NÃO criar \chapter* nem \section*
+\makeatletter
+\def\thenomenclature{%
+  \nompreamble
+  \list{}{%
+    \labelwidth\nom@tempdim
+    \leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \itemsep\nomitemsep
+    \let\makelabel\nomlabel}%
+}
+\def\endthenomenclature{%
+  \endlist
+  \nompostamble
+}
+\makeatother
+
+% %----- pacote nomenclaturas ----%
+
 \renewcommand{\quote}{\list{}{\rightmargin=0cm\leftmargin=4cm\topsep=0pt}\item\relax}
 
 \newenvironment{loutfirecuo}{\begin{quoting}[rightmargin=0cm,leftmargin=1cm]\vspace{-3mm}\footnotesize\singlespacing }{\end{quoting}}
@@ -186,7 +213,8 @@
 
 \begin{document}\clearpage
     \input{01_Pre_Textual/A_Capa} 
-    \input{01_Pre_Textual/B_Folha_de_Aprovacao} \input{01_Pre_Textual/C_Ficha_Catalografica} 
+    %\input{01_Pre_Textual/B_Folha_de_Aprovacao} 
+    %\input{01_Pre_Textual/C_Ficha_Catalografica} 
     \pagestyle{plain} 
     \pagenumbering{roman} 
     \input{01_Pre_Textual/D_Dedicatoria} 
