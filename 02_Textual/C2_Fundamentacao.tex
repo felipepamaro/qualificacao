@@ -92,61 +92,128 @@ Esse enquadramento anterior tem uma consequência direta para o propósito do ar
 
 O artefato proposto neste trabalho é conceitualmente um instrumento que acelera e tutora o autor iniciante nesta enculturação, tornando operáveis regras que de outro modo permaneceriam subentendidas. Trata-se, portanto, de uma contribuição de natureza teórica e não apenas tecnológica. Assim decorrem as três questões que orientam o desenho da solução: quais são as regras de gênero de cada trilha, como um autor pode verificar se seu manuscrito está em conformidade com elas, e de que modo um sistema multiagente pode realizar essa verificação de maneira fundamentada.
 
-\section{Análise de \textbf{moves} retóricos}
+\section{Análise de moves retóricos e o modelo CARS}
 
-A Teoria de Gêneros fornece o porquê sociotécnico, mas é abstrata demais para orientar diretamente a implementação. A ponte entre o construto abstrato e o texto observável é a análise de \textbf{moves} retóricos, na tradição da escrita acadêmica de \cite{GenreAnalysis}. O modelo CARS (\textbf{Create a Research Space}) decompõe a introdução de artigos científicos em movimentos retóricos recorrentes: estabelecer o território (situar a relevância e revisar a literatura), estabelecer o nicho (apontar a lacuna ou o problema) e ocupar o nicho (anunciar a contribuição e a organização do trabalho).
+A Teoria de Gêneros fornece o porquê sociotécnico, mas é abstrata demais para orientar diretamente uma implementação. A ponte entre o construto e a evidência textual é a análise de \textbf{moves} retóricos,
+desenvolvida por \cite{GenreAnalysis}.
 
-A importância desse modelo para a pesquisa é dupla. Primeiro, os \textbf{moves} são a manifestação observável e mensurável do gênero abstrato: onde \cite{GenresOrgComm} falam de regularidades de forma e substância, \cite{GenreAnalysis} oferece o microscópio que as torna visíveis no texto. Segundo, os \textbf{moves} são operacionalizáveis por processamento de linguagem natural, o que fornece precedente metodológico para sua extração automatizada. A articulação, portanto, é a seguinte: a Teoria de Gêneros define o construto de Sistemas de Informação; a análise de \textbf{moves} operacionaliza esse construto em unidades observáveis; 
-e a extração automatizada de \textbf{moves} fornece o mecanismo pelo qual um modelo de LLM pode verificar se uma instância invocou regras distintivas suficientes para ser reconhecida como pertencente ao gênero que reivindica.
+Um \textbf{move} é um segmento de texto delimitado por sua função retórica, e não por sua extensão ou por sua forma. Pode se realizar em uma oração, em uma sentença ou em vários parágrafos, desde que cumpra um mesmo propósito comunicativo dentro de um gênero. Cada \textbf{move} admite diferentes realizações, chamadas \textit{steps}, que funcionam como alternativas ou complementos à disposição do autor \cite{ResearchGenres}. O \textbf{move} responde pela função, portanto é relativamente estável na comunidade; o \textit{step} responde pela estratégia escolhida, portanto é onde se manifestam variação disciplinar e estilo autoral.
 
-\section{Design Science Research e a anatomia da teoria de design}
-%(HEVNER et al., 2004; PEFFERS et al., 2007)
-O trabalho adota o método Design Science Research \cite{Hevner2004,Peffers2007}, que orienta a construção e a avaliação de artefatos como forma de produção de conhecimento. Mais do que produzir um artefato, esta pesquisa pretende produzir uma \textbf{teoria de design}, no sentido de \cite{DesignTheory}, cuja anatomia prevê oito componentes: propósito e escopo; construtos; princípios de forma e função; mutabilidade do artefato; proposições testáveis; conhecimento justificador; princípios de implementação; e instanciação expositiva. 
-%Essa anatomia estrutura o Capítulo 4 e é o que permite que a contribuição transcenda o protótipo específico do SBSI, elevando-a a um conjunto de princípios generalizáveis — condição para a evolução do trabalho rumo a uma tese de doutorado.
+A definição de \textbf{move} oferece a unidade de análise, mas não diz quais \textbf{moves} compõem um gênero determinado. Essa é uma questão empírica, e sua resposta é necessariamente específica: o repertório de funções retóricas de  um resumo não é o de uma seção de discussão, nem o de um parecer de revisão. Descrever um gênero na tradição de Swales significa levantar em um corpus representativo de exemplares quais funções recorrem, com que frequência, em que ordem e por meio de quais realizações. O produto desse levantamento é um
+modelo de \textbf{moves}, e é o modelo, não a definição, que permite dizer se um texto realizou ou deixou de realizar o que sua comunidade espera dele.
 
-\input{FIGURAS/IMG/IntegradorTeorias.tex}
+O modelo \textit{Create a Research Space} (CARS) descreve a organização retórica de introduções de artigos científicos. Sua formulação original \cite{GenreAnalysis} propõe três \textbf{moves}: estabelecer o território,
+estabelecer o nicho e ocupar o nicho. O pesquisador precisa reafirmar a relevância do território perante a comunidade discursiva, identificar nele um nicho ainda não ocupado e demonstrar como esse nicho será tomado e defendido. Disso decorre que o esforço retórico necessário para criar um espaço de pesquisa é variável, dependendo da competição existente na área, da dimensão do nicho reivindicado e da reputação de quem escreve.
 
-% > **[Figura 2 — Quadro integrador das três teorias]**
-% > *Melhor local para inserção: ao final do Capítulo 2, como síntese. Diagrama em três camadas (Teoria de Gêneros → análise de moves → teoria de compiladores) dentro da moldura do DSR, cada camada associada à pergunta que responde (o quê / como medir / por que funciona) e ao estágio correspondente do artefato.*
-% > 
-% > Figura 2. Integração das três camadas teóricas sob o método DSR. Elaboração própria.
+Catorze anos depois, à luz de estudos que testaram o modelo em corpora diversos, \cite{ResearchGenres} apresenta uma versão revista, reproduzida na Tabela~\ref{tab:cars}. 
+
+\begin{table}[H]
+\centering
+\caption{Modelo CARS revisado, conforme \cite{ResearchGenres}}
+\label{tab:cars}
+\begin{tabular}{@{}p{0.30\textwidth}p{0.62\textwidth}@{}}
+\toprule
+\textbf{Move} & \textit{Steps} \\
+\midrule
+\textbf{Move 1} --- Estabelecer o território \newline \textit{(citações
+obrigatórias)} &
+Realizado por generalizações de tópico de especificidade crescente \\
+\addlinespace
+\textbf{Move 2} --- Estabelecer o nicho \newline \textit{(citações possíveis)} &
+\textit{Step 1A}: indicar uma lacuna \newline
+\hspace*{1em} \textit{ou} \newline
+\textit{Step 1B}: acrescentar ao que já se sabe \newline
+\textit{Step 2} (opcional): apresentar justificativa positiva \\
+\addlinespace
+\textbf{Move 3} --- Apresentar o trabalho atual \newline \textit{(citações
+possíveis)} &
+\textit{Step 1} (obrigatório): anunciar a pesquisa, descritiva e/ou
+propositivamente \newline
+\textit{Step 2} (opcional): apresentar questões de pesquisa ou hipóteses
+\newline
+\textit{Step 3} (opcional): esclarecer definições \newline
+\textit{Step 4} (opcional): sumarizar os métodos \newline
+\textit{Step 5} (PDA): anunciar os principais resultados \newline
+\textit{Step 6} (PDA): declarar o valor da pesquisa \newline
+\textit{Step 7} (PDA): descrever a estrutura do artigo \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize
+Nota: os \textit{Steps} 2 a 4 são opcionais e menos fixos em sua ordem de
+ocorrência que os demais. PDA indica \textit{prováveis em determinadas áreas},
+categoria com que o autor marca elementos frequentes em certos campos
+disciplinares e improváveis em outros. Prevê-se ainda a reciclagem dos
+\textbf{Moves} 1 e 2 em ciclos de tópicos progressivamente mais específicos.
+\end{flushleft}
+\end{table}
+
+Essa gradação é operacionalmente útil para o artefato proposto neste trabalho, pois permite distinguir três situações que um parecer genérico tende a confundir: a ausência de um elemento obrigatório, que caracteriza uma introdução incompleta; a ausência de um elemento opcional, que constitui escolha autoral legítima e não demanda observação; e a ausência de um elemento PDA, que só representa problema quando a área de destino o espera.
+
+Os \textbf{moves} são, portanto, a manifestação observável do gênero. Onde \cite{GenresOrgComm} descrevem regularidades socialmente reconhecidas de forma e substância, a análise de \textbf{moves} fornece o procedimento que as localiza no texto, atribuindo a cada segmento a função comunicativa que ele cumpre
+perante a comunidade. Que essa localização seja tratável computacionalmente não é conjectura: o próprio \cite{ResearchGenres} discute trabalho de linguística computacional que adotou um modelo de quatro \textbf{moves} para viabilizar a sumarização automática de artigos científicos, precedente anterior ao advento dos modelos de linguagem de larga escala. A este soma-se o catálogo de exponentes linguísticos levantado pelo autor, que oferece marcas de superfície associadas a cada função retórica.
+
+Articulam-se assim três níveis. A Teoria de Gêneros fornece o construto teórico, estabelecendo que o artigo submetido a uma trilha é ação retórica tipificada, reconhecida por uma comunidade e regida por convenções por ela mantidas. A análise de \textbf{moves} decompõe esse construto em unidades observáveis, cada uma vinculada a um propósito comunicativo e a um estatuto determinado, obrigatório, opcional ou dependente da área. A extração automatizada de \textbf{moves} fornece o mecanismo pelo qual um modelo de linguagem pode verificar se um texto realizou as funções que a comunidade espera do gênero que ele reivindica, e localizar no próprio texto o ponto em que cada função foi ou não cumprida.
+
+O que se estabeleceu até aqui é a base de conhecimento que direciona o artefato, mas não o método que o produz. Fundamentar por que um tutor de gênero deve existir e o que ele deve observar não equivale a especificar como projetá-lo, construí-lo e avaliá-lo com rigor de pesquisa. 
+Esse percurso exige método próprio. A abordagem metodológica adotada neste trabalho para conduzir da fundamentação teórica ao artefato é o Design Science Research (DSR).
+
+
+\section{Design Science Research}
+
+O Design Science Research (DSR) distingue-se das abordagens de natureza comportamental por seu produto. Enquanto estas buscam explicar ou prever fenômenos organizacionais e tecnológicos, o DSR produz conhecimento por meio da construção e da avaliação de artefatos destinados a resolver problemas relevantes \cite{Hevner2004}. O conhecimento não decorre apenas da observação do mundo como ele é, mas da criação disciplinada de algo que ainda não existe e do exame sistemático de seu comportamento.
+
+Essa orientação é adequada ao problema tratado neste trabalho. A dificuldade do pesquisador iniciante em Sistemas de Informação diante das convenções de sua comunidade não carece de explicação adicional: dispõe de fundamentação consolidada, conforme discutido nas seções anteriores. O que falta é um instrumento capaz de tornar essas convenções explícitas e acionáveis no momento em que o texto está sendo escrito. Trata-se, portanto, de um problema de projeto, e não de compreensão.
+
+O processo adotado segue as atividades propostas por \cite{Peffers2007}: identificação do problema e motivação, definição dos objetivos de uma solução, projeto e desenvolvimento, demonstração, avaliação e comunicação. O ponto de entrada desta pesquisa é centrado no problema, uma vez que a investigação teve origem na constatação de uma dificuldade concreta e recorrente, e não na disponibilidade de uma tecnologia à procura de aplicação.
+
+Cabe explicitar o papel que a fundamentação apresentada até aqui desempenha esse processo. No arcabouço de \cite{Hevner2004}, o rigor de uma pesquisa em DSR decorre do uso apropriado da base de conhecimento existente, composta por teorias, construtos, modelos e métodos que informam tanto a construção do artefato quanto os critérios de sua avaliação. A Teoria de Gêneros e a análise de \textbf{moves} retóricos não constituem, assim, revisão preliminar destinada a situar o trabalho: delas o artefato extrai seus construtos, o que deve observar no texto e os critérios pelos quais seu comportamento será julgado. A relação é e dupla mão, uma vez que o DSR prevê que os resultados da pesquisa retornem à base de conhecimento, ampliando-a.
+
+A avaliação do artefato é, nesse arcabouço, elemento constitutivo e não etapa final de verificação. É ela que sustenta a afirmação de utilidade e o que distingue a pesquisa de um relato de desenvolvimento. Os instrumentos de avaliação adotados neste trabalho, bem como as evidências que se pretende produzir, são apresentados no capítulo de método.
 
 
 
-% ------------------------------------------------------------------------------------------------------------
 
-% \section{Contextualization}
-
-% Entanglement Theories seek to understand the phenomena that emerge from interactions between humans and non-humans \cite{frauenberger2019entanglement}. LAKS JJKSF JSJKSD ssk sdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsjsdjfksd fsdjk dsjdks sdjkf jksjks fdjksdfj sjsj. Table \ref{tab:fontes_incerteza_tar} presents bla blab alb al.
-
-% \begin{table}[ht!]
+% \begin{figure}[H]
 % \centering
-% \scriptsize
-% \caption{Sources of Uncertainty in ANT.}
-% \rowcolors{3}{gray!10}{white}
-% \begin{tabular}{p{0.19\textwidth} p{0.32\textwidth} p{0.40\textwidth}}
-% \toprule
-% \textbf{Soursdfsinty} & \textbf{Descsdfsdtion} & \textbf{Impliss} \\
-% \midrule
+% \caption{Do construto social à marca textual}
+% \label{fig:granularidade}
+% \begin{tikzpicture}[
+%   node distance=0.45cm,
+%   every node/.style={font=\small},
+%   caixa/.style={draw, rounded corners=2pt, text width=0.62\textwidth,
+%                 inner sep=6pt, align=left},
+%   seta/.style={-{Latex[length=2mm]}, thick}
+% ]
+% \node[caixa] (com) {\textbf{Comunidade discursiva} \\
+%   \footnotesize Rede sociorretórica com objetivos comuns --- a comunidade
+%   científica de SI};
+% \node[caixa, below=of com] (rep) {\textbf{Repertório de gêneros} \\
+%   \footnotesize Conjunto de gêneros que a comunidade mobiliza --- chamada,
+%   submissão, parecer};
+% \node[caixa, below=of rep] (gen) {\textbf{Gênero} \\
+%   \footnotesize Classe de eventos comunicativos com propósito compartilhado ---
+%   o artigo de trilha};
+% \node[caixa, below=of gen] (mov) {\textbf{\textit{Move}} \\
+%   \footnotesize Segmento delimitado pela função retórica que cumpre ---
+%   estabelecer o nicho};
+% \node[caixa, below=of mov] (ste) {\textbf{\textit{Step}} \\
+%   \footnotesize Estratégia que realiza a função --- indicar uma lacuna};
+% \node[caixa, below=of ste] (exp) {\textbf{Exponente linguístico} \\
+%   \footnotesize Marca de superfície associada à estratégia --- conectivo
+%   adversativo, quantificador negativo};
 
-% No Groxxdfsup vesdfsdfsdation: & Groups asdfdfsfsdfsdvisional assemblages. & The researcher must empiricasdfsdfsdfsdsd transformed within networks. \\
+% \draw[seta] (com) -- (rep);
+% \draw[seta] (rep) -- (gen);
+% \draw[seta] (gen) -- (mov);
+% \draw[seta] (mov) -- (ste);
+% \draw[seta] (ste) -- (exp);
 
-% Isolated sdfsdfsd  fsd f & sdfsd fsdf sdf sd fsddf sd sdfs fsdf dssd fs fsfsdfd sds dfsd fs. & sf sd fdf ds fds fsd sdfdsf sdf sd fsd fsd sdf sd. \\
-
-% Human s jfsf sdfsd human Agency & sdj fskjf jkfskjfsdjksdfks jkfdsjks fjks sfkdfssfdkksskdkssdk. & sjf sdkjfsdf kjskjfsjffsfsfsdfsdfsdjkfj fkf kjs fdkfskfskfskjskjfsfsk. \\
-
-% sd fljkfsdjk fsdjkfsdjkfsdjkfsdkjsfdkjs & s dfjksfjksfjk sdfjksd jksjksjkfskd sdk sksksksksk. & sdjkf sdjkfsfkjsdfkj sdjkfkssfkfsdkjfsdkksfksds. \\
-
-% \bottomrule
-% \end{tabular}
-% \label{tab:fontes_incerteza_tar}
-% \caption*{\textbf{Source:} Author's elaboration.}
-% \end{table}
-
-
-
-
-% The first source of uncertainty \cite[pp.~27-42]{latour2005reassembling} statkba jkdajb dakb jadjkbkadjb ajkbdajkmation, the researcher cannot simply rely on fixed categories such as ``society,'' ``organization,'' or ``users'' as starting points. It becomes necessary to observe how sfk jsfkjsd fjks fjkssfgroupings.
-
-% The second source of uncertainty \cite[pp.~44-62]{latour2005reassembling} concerns the nature of action: action is always distributed. There is no isolated agent or clear point of origin, since ev
-% This way of thinking about action profoundly transforms how we investigate social and technical phenomena. If action is always distributed, the researcher can no longer attribute it to a single agent such as a person, an institution, or a technology. Instead, it becomes necessary to trace the trajectory of the action and observe how it is produced by a network of heterogeneous elements that operate together. This requires close attention to detail: which tools were used, which norms were involved, which interpretations were mobilized, and which artifacts intervened. Agency ceases to be something that someone possesses and becomes something that occurs among many.
+% \node[right=0.3cm of rep, rotate=-90, anchor=south, font=\footnotesize\itshape]
+%   {Teoria de Gêneros};
+% \node[right=0.3cm of ste, rotate=-90, anchor=south, font=\footnotesize\itshape]
+%   {Análise de \textit{moves}};
+% \end{tikzpicture}
+% \vspace{4pt}
+% \begin{flushleft}\footnotesize Fonte: elaborada pelo autor.\end{flushleft}
+% \end{figure}
