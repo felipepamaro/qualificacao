@@ -104,7 +104,7 @@ O Fluxo A institui o padrão; o Fluxo B avalia com base neste padrão. Sem o Flu
 \node[banda] at (-0.6,1.15) {Fluxo A --- por trilha, em lote};
  
 \node[data] (corpus) at (0,0)    {Corpus da trilha\\[-1pt] \scriptsize (artigos aceitos)};
-\node[det]  (a1)     at (3.1,0)  {\textbf{A1}\\[-1pt] Ingestão dos\\ documentos};
+\node[det]  (a1)     at (3.1,0)  {\textbf{A1}\\[-1pt] Ingestão e Conversão\\ dos documentos};
 \node[inf]  (a2)     at (6.2,0)  {\textbf{A2}\\[-1pt] Extração de\\ \textbf{moves}};
 \node[det]  (a3)     at (9.3,0)  {\textbf{A3}\\[-1pt] Agregação\\ determinística};
 \node[det]  (a4)     at (12.4,0) {\textbf{A4}\\[-1pt] Derivação das\\ regras de gênero};
@@ -171,9 +171,9 @@ o bloco escuro envolve inferência de modelo de linguagem, aplicada de forma id�
 
 A ingestão dos documentos é a etapa de preparação do corpus da trilha, que por sua vez precisa esteja definido antes da execução para que seja prossível o processamento. Por Definição, o corpus é composto por artigos completos aceitos em uma trilha-alvo, e não por submissões rejeitadas ou por artigos de outras trilhas. A ingestão é conversão de formatos.
 
-O Corpus definido na fase de desenvolvimenteo deste artefato foram todos os artigos completos e publicados nos \textit{Anais do Anais do XXII Simpósio Brasileiro de Sistemas de Informação}, coletados através do SBC OpenLib \cite{solsbc} e organizados em pastas, totalizando 68 artigos, definindo assim a trilha-alvo.
+O Corpus definido na fase de desenvolvimenteo deste artefato foram todos os artigos completos e publicados nos \textit{Anais do Anais do XXII Simpósio Brasileiro de Sistemas de Informação - SBSI 2026} e \textit{Anais do XXII Encontro Nacional de Inteligência Artificial e Computacional - ENIAC 2025}, coletados através do SBC OpenLib \cite{solsbc} e organizados em pastas, totalizando 67 artigos do SBSI 2026 e 177 artigos do ENIAC 2025, definindo assim o corpus e as trilhas-alvo.
 
-Os artigos da trilha-alvo, no formato PDF, são convertidos com Docling \cite{Docling}, preservando-se toda a sua estrutura original são convertidos para Markdown e Json. Esse objeto fornece segmentação de seções, tipagem de itens e contagem de tabelas e figuras sem recurso a expressões regulares sobre texto corrido, o que reduz a fragilidade da etapa. Aplica-se na sequência um função de correção de acentuação característicos de documentos produzidos por composição \LaTeX{} em português, frequentes no acervo nacional. Estas correções buscam uniformizar a representação de caracteres acentuados, e outros caracteres especiais da lingua portuguesa.
+Os artigos da trilha-alvo foram obtidos no formato PDF, e por sua vez são convertidos com Docling \cite{Docling}, preservando-se toda a sua estrutura original são convertidos para Markdown e Json. Esse objeto fornece segmentação de seções, tipagem de itens e contagem de tabelas e figuras sem recurso a expressões regulares sobre texto corrido, o que reduz a fragilidade da etapa. Aplica-se na sequência um função de correção de acentuação característicos de documentos produzidos por composição \LaTeX{} em português, frequentes no acervo nacional. Estas correções buscam uniformizar a representação de caracteres acentuados, e outros caracteres especiais da lingua portuguesa. Importante ressaltar que a etapa de ingestão não envolve inferência de modelo de linguagem (LLM), e portanto é determinística , auditável e independente. 
 
 
 \subsection*{A2. Extração de \textbf{moves}}
@@ -221,44 +221,46 @@ A extração é feita por artigo, nunca sobre o corpus agregado. Cada chamada op
 )
 \end{lstlisting}
 \vspace{2pt}
-{\footnotesize\textit{Nota: Este é apenas um exemplo ilustrativo, não faz parte do corpus citado como exemplo na seção anterior(A1).}}
+{\footnotesize\textit{Nota: Este é apenas um exemplo ilustrativo, não faz parte do corpus citado como exemplo na seção anterior(A2).}}
 \end{minipage}
 
 
 \subsection*{A3. Agregação determinística}
 
-Os registros produzidos em A2 e A3 são consolidados em distribuições de frequência por trilha: proporção de artigos em que cada \textbf{move} ocorre, ordem modal de ocorrência, coocorrência de \textit{steps} e estatísticas estruturais. Nesta etapa não é nenhuma inferência de modelo de LLM, permanecendo integralmente determinística e auditável. A agregação produz a base de conhecimento que sustenta a especificação de gênero, e dela decorrem as regras de gênero que o Modo Tutor aplica.
+Os registros produzidos em A1 e A2 são consolidados em distribuições de frequência por trilha: proporção de artigos em que cada \textbf{move} ocorre, ordem modal de ocorrência, coocorrência de \textit{steps} e estatísticas estruturais. Nesta etapa não é nenhuma inferência de modelo de LLM, permanecendo integralmente determinística e auditável. A agregação produz a base de conhecimento que sustenta a especificação de gênero, e dela decorrem as regras de gênero que o Modo Tutor aplica.
 
 
 \subsection*{A4. Derivação das regras de gênero}
 
 Uma distribuição de frequências descreve o corpus, mas não pode ser confrontada com um manuscrito: falta-lhe a forma de um predicado. A etapa A4 realiza essa tradução, e é ela que habilita o Fluxo A ao Fluxo B e viabiliza o Modo Tutor do artefato.
 
-O objeto produzido não é arbitrário: ele decorre da própria fundamentação. \citeonline{GenresOrgComm} sustentam que gêneros são encenados por meio de \textbf{regras de gênero}, que associam elementos apropriados de forma e substância a situações recorrentes, e que tais regras operam com frequência de modo tácito, por socialização e hábito. O que o Fluxo A realiza, nestes termos, é a explicitação dessas regras a partir do único registro em que elas se encontram materialmente depositadas, que é o conjunto de textos que a comunidade reconheceu. Cada regra derivada é composta pelos elementos descritos na Tabela~\ref{tab:regra}.
+O objeto produzido não é arbitrário: ele decorre da própria fundamentação. \citeonline{GenresOrgComm} sustentam que gêneros são encenados por meio de \textbf{regras de gênero}, que associam elementos apropriados de forma e substância a situações recorrentes, e que tais regras operam com frequência de modo tácito, por socialização e hábito. O que o Fluxo A realiza, nestes termos, é a explicitação dessas regras a partir do único registro em que elas se encontram materialmente depositadas, que é o conjunto de textos que a comunidade reconheceu. 
 
-\begin{table}[H]
-\centering
-\caption{Composição de uma regra de gênero}
-\label{tab:regra}
-\small
-\begin{tabular}{|p{2.6cm}|p{7.2cm}|p{3.4cm}|}
-\hline
-\textbf{Elemento} & \textbf{Conteúdo} & \textbf{Origem} \\
-\hline
-Dimensão & Dimensão do sistema de gêneros a que a regra se refere & \cite{GenreSystems} \\
-\hline
-Predicado & Condição verificável sobre a representação do manuscrito & A6 \\
-\hline
-Estatuto & Esperada, frequente, opcional ou rara na trilha & Limiar aplicado a A4 \\
+% Cada regra derivada é composta pelos elementos descritos na Tabela~\ref{tab:regra}.
+
+% \begin{table}[H]
+% \centering
+% \caption{Composição de uma regra de gênero}
+% \label{tab:regra}
+% \small
+% \begin{tabular}{|p{2.6cm}|p{7.2cm}|p{3.4cm}|}
 % \hline
-% Suporte & Número de artigos aceitos que realizam a regra & A4 \\
-\hline
-Função & Propósito comunicativo que o elemento cumpre no gênero & \cite{ResearchGenres} \\
-\hline
-Exemplares & Segmentos que realizam a regra no corpus & A5 \\
-\hline
-\end{tabular}
-\end{table}
+% \textbf{Elemento} & \textbf{Conteúdo} & \textbf{Origem} \\
+% \hline
+% Dimensão & Dimensão do sistema de gêneros a que a regra se refere & \cite{GenreSystems} \\
+% \hline
+% Predicado & Condição verificável sobre a representação do manuscrito & A3 \\
+% \hline
+% Estatuto & Esperada, frequente, opcional ou rara na trilha & Limiar aplicado a A4 \\
+% % \hline
+% % Suporte & Número de artigos aceitos que realizam a regra & A4 \\
+% \hline
+% Função & Propósito comunicativo que o elemento cumpre no gênero & \cite{ResearchGenres} \\
+% \hline
+% Exemplares & Segmentos que realizam a regra no corpus & A5 \\
+% \hline
+% \end{tabular}
+% \end{table}
 
 
 % \section{A Especificação de Gênero}
@@ -273,26 +275,27 @@ Exemplares & Segmentos que realizam a regra no corpus & A5 \\
 \section{Fluxo B: o Modo Tutor}
 \label{sec:fluxo-b}
 
-O Modo Tutor executa duas formas de consulta, correspondentes a duas análises distintas sobre o trabalho do autor.
-
-A \textbf{consulta à especificação} não pressupõe trilha-alvo e nem possui uma definição padrão(Default). O autor seleciona a trilha-alvo e recebe a especificação renderizada em linguagem natural com o resultado da análise e orientações para o autor: o que aquela trilha espera, com que frequência cada elemento ocorre entre os artigos aceitos, que função cada um cumpre e como artigos reais os realizaram. 
+O Modo Tutor é a camada em que o autor usuario do artefatosubmete seu artigo para ser avaliado. Neste momento um arquivo é submetido ao artefato e uma trilha é previamente definida como parametro. O artefato não pressupõe trilha-alvo e nem possui uma definição padrão(Default). Ao fim da execução o autor recebe a especificação renderizada em linguagem natural com o resultado da análise e orientações: o que aquela trilha espera, com que frequência cada elemento ocorre entre os artigos aceitos, que função cada um cumpre e como artigos reais os realizaram. 
 
 O tutor não sugere modificações no manuscrito, nem reescreve trechos, nem oferece redação alternativa pronta para incorporação. A restrição responde ao achado de \citeonline{WhyandWhen}, segundo o qual usuários tendem a assumir respostas de modelos de linguagem sem submetê-las a exame, e é coerente com o propósito formativo: pretende-se que o autor internalize a regra de gênero, e não que seu texto seja corrigido por uma IA, cabe ao autor decidir se o resultado é relevante e seus acionáveis.
 
-A \textbf{verificação de manuscrito} compreende as etapas descritas a seguir.
+
+% A \textbf{verificação de manuscrito} compreende as etapas descritas a seguir.
 
 \subsection*{B1--B2. Ingestão e extração}
 
-O manuscrito percorre o mesmo procedimento de A1 a A3, com o mesmo conversor, o mesmo extrator e o mesmo esquema de saída.
+O manuscrito percorre o mesmo procedimento de A1 a A3, com o mesmo conversor, o mesmo extrator e o mesmo esquema de saída, ou seja o artigo precisa ser convertido para Markdown e Json com o mesmo conversor.
 
 \subsection*{B3. Verificação de conformidade}
 
-Cada regra da Especificação de Gênero tem seu predicado avaliado contra a representação do manuscrito. A operação é determinística e produz dois conjuntos: as regras \textbf{invocadas} pelo manuscrito e as regras \textbf{não invocadas}. Sobre o segundo conjunto aplica-se o filtro de estatuto, de modo que apenas as regras de estatuto esperado dão origem a observação, ao passo que a não realização de regras opcionais permanece sem consequência.
+Cada regra da Especificação de Gênero tem seu predicado avaliado contra a  manuscrito que está sendo analisado. A operação é determinística e produz dois conjuntos: as regras \textbf{invocadas} pelo manuscrito e as regras \textbf{não invocadas}. Sobre o segundo conjunto aplica-se o filtro de estatuto, de modo que apenas as regras de estatuto esperado dão origem a observação, ao passo que a não realização de regras opcionais permanece sem consequência.
 
-O resultado final da etapa não é uma pontuação. A recusa de emitir score agregado de conformidade é proposital, dado que uma nota converteria retorno formativo em julgamento e aproximaria o artefato do papel de revisor, além de atribuir uma responsabilidade que o artefato não tem. O propósito do Modo Tutor é orientar um pesquisador iniciante, não inferir sobre aceitação ou rejeição. 
+O resultado final da etapa não apresenta pontuação. A recusa de emitir score agregado de conformidade é proposital, dado que uma nota converteria retorno formativo em julgamento e aproximaria o artefato do papel de revisor, além de atribuir uma responsabilidade que o artefato não tem. O propósito do Modo Tutor é orientar um pesquisador iniciante, não inferir sobre aceitação ou rejeição. 
 
 
 % \subsection*{B4. Composição do retorno}
+
+
 
 % Cada elemento a ser comunicado, regra invocada ou regra esperada não realizada, é convertido em texto por um modelo LLM, cujo contexto recebido corresponde ou não as regras de gênero. Ao modelo cabe a redação; não lhe cabe decidir o que está ou não em conformidade, decisão já tomada em B3, nem produzir redação substituta para o texto do autor.
 
@@ -370,7 +373,7 @@ Elemento sem correspondência na especificação & Variação não observada no 
 
 \textbf{Viés de sobrevivência do corpus.} O corpus é composto exclusivamente por artigos aceitos. A especificação modela o gênero tal como realizado pelos textos aprovados, e não a fronteira que separa aceitação de rejeição. O artefato pode afirmar que um manuscrito diverge do padrão dos aceitos. Não pode afirmar que tal divergência causaria sua rejeição. A distinção deve ser preservada na redação do retorno ao autor e na formulação dos resultados da avaliação.
 
-\textbf{Dependência da qualidade da extração.} Toda a cadeia repousa sobre a acurácia do rotulador de A3. É esta a razão pela qual a validação técnica preliminar, visando medir a concordância entre os rótulos produzidos pelo modelo local e uma anotação manual de referência, em amostra reduzida, antes de qualquer processamento do corpus completo.
+\textbf{Dependência da qualidade da extração.} Toda a cadeia repousa sobre a acurácia do rotulador de A2. É esta a razão pela qual a validação técnica preliminar, visando medir a concordância entre os rótulos produzidos pelo modelo de linguagem e uma anotação manual de referência, em amostra reduzida, antes de qualquer processamento de um corpus mais amplo.
 
 % \textbf{Cobertura da camada retórica.} O modelo CARS descreve a organização retórica de introduções de artigos científicos. A camada retórica do protótipo restringe-se à introdução do manuscrito, ao passo que a camada estrutural cobre o artigo integralmente. A extensão a outras seções exigiria modelos de \textbf{moves} próprios, cuja construção constitui trabalho futuro.
 
