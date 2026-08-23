@@ -2,81 +2,384 @@
 
 
 \chapter{Solução Proposta}\label{chap:Uma Teoria de Design para um Tutor de Gêneros Científicos}
+\label{chap:solucao}
 
+% Os capítulos anteriores estabeleceram por que um tutor de gênero deve existir e qual conhecimento o fundamenta. A Teoria de Gêneros \cite{GenresOrgComm, GenreRepertoire, GenreSystems} forneceu o construto: o artigo submetido a uma trilha é ação comunicativa tipificada, reconhecida por uma comunidade e regida por regras que esta mantém e raramente enuncia. A análise de \textbf{moves} retóricos \cite{GenreAnalysis, ResearchGenres} forneceu a unidade observável pela qual essas regras se manifestam no texto. O Design Science Research \cite{Hevner2004, Peffers2007} forneceu o método pelo qual se passa desse conhecimento a um artefato avaliável.
 
+% Este capítulo apresenta o projeto do artefato. A exposição parte da delimitação do escopo, deriva os requisitos a partir da fundamentação, enuncia os princípios que governam as decisões de projeto e descreve a arquitetura e seus dois fluxos de processamento. Detalha-se, em seguida, a especificação de gênero que o sistema produz, o modo pelo qual essa especificação é convertida em regras verificáveis e a composição do retorno entregue ao autor. O capítulo encerra com o registro das decisões de projeto, das alternativas descartadas e das delimitações que restringem o que o artefato pode legitimamente afirmar.
 
-Este capítulo especifica a solução como uma teoria de design, organizada segundo os oito componentes anatômicos de \cite{DesignTheory}. O propósito dessa organização é duplo: descrever o artefato e, simultaneamente, produzir conhecimento de design generalizável.
+\section{Propósito e Escopo}
+\label{sec:delimitacao}
 
-\section{Propósito e escopo}
+O artefato proposto é um \textbf{tutor de conformidade de gênero}: um sistema que modela o gênero comunicativo de uma trilha de conferência a partir do corpus de artigos nela aceitos e verifica a conformidade de um manuscrito em elaboração a essa especificação, produzindo retorno rastreável e formativo ao autor.
 
-O artefato tem por propósito apoiar autores em início de carreira a produzir manuscritos conformes às convenções de gênero da trilha-alvo, reduzindo a rejeição editorial precoce por inadequação de gênero e tornando explícito um conhecimento hoje tácito. Seu escopo de aplicabilidade compreende contextos em que exista uma comunidade científica com gêneros estáveis, um corpus de instâncias aceitas suficiente para caracterizar o gênero, e um insumo textual estruturável. O artefato destina-se ao apoio formativo, mantendo o revisor humano no processo decisório; não pretende substituir o juízo de mérito nem automatizar decisões editoriais.
+O objeto final é entregar ao usuário duas respostas, designadas em conjunto compondo assim o que chamaremos de \textbf{Modo Tutor}. A primeira é a \textbf{verificação de conformidade de gênero}: dado um manuscrito a ser avaliado e definida uma trilha-alvo, identificar quais regras de gênero da trilha o manuscrito contempla, quais deixa de contemplar e em que ponto do texto cada função retórica esperada foi ou não realizada. A segunda é a \textbf{orientação de escrita}: apresentar as realizações quanto as ausências identificadas em retorno acionável, ancorado na evidência textual do próprio manuscrito e em exemplares reais extraídos do corpus da trilha.
 
-\section{Construtos}
+% A delimitação é tão informativa quanto a definição. O artefato não julga o mérito científico da contribuição, não estima probabilidade de aceitação, não emite recomendação de decisão editorial, não verifica novidade em relação à literatura externa ao corpus da trilha, não avalia correção metodológica e não reescreve o texto do autor. Cada uma dessas exclusões corresponde a uma tarefa cuja natureza de verificação de pertencimento a um gênero, e cuja inclusão exigiria base de conhecimento distinta da que sustenta este trabalho.
 
-Os construtos fundamentais e sua ancoragem teórica são: gênero comunicativo e repertório/sistema de gêneros \cite{GenresOrgComm,GenreSystems}; move retórico \cite{GenreAnalysis}; especificação de gênero, entendida como a representação computável das regularidades de uma trilha derivada do corpus; conformidade de gênero, o grau de aderência de uma instância a essa especificação; diagnóstico acionável, o retorno que aponta um desvio específico e sua correção esperada; e enculturação acadêmica, o processo de internalização dos gêneros pela comunidade.
+Importante ressaltar que a análise de um manuscrito através deste artefato não julga o mérito científico da contribuição, ele verifica quais são as regras de gênero de cada trilha, como um autor pode verificar se seu manuscrito está em conformidade com elas, e de que modo um sistema multiagente pode realizar essa verificação de maneira fundamentada.
 
-\section{Princípios de forma e função}
+\section{Requisitos derivados da fundamentação}
+\label{sec:requisitos}
 
-O artefato organiza-se como um pipeline em três estágios, espelhando a separação clássica de um compilador. No estágio de parsing, cada instância do corpus é convertida em uma representação intermediária estruturada, capturando elementos de forma (estrutura de seções, moves, métricas) e marcadores de substância. No estágio de agregação, os registros são combinados deterministicamente para produzir a especificação de gênero da trilha. No estágio de verificação e diagnóstico, um manuscrito submetido é convertido e comparado à especificação da trilha-alvo, gerando diagnósticos; no modo tutor, acrescentam-se o roteamento entre trilhas e a orientação formativa.
-
-Desses princípios de forma e função derivam cinco princípios de design (DP), que constituem o núcleo generalizável da contribuição:
-
-- DP1 — Modelar antes de avaliar. Construir a especificação do gênero-alvo antes de avaliar qualquer instância.
-- DP2 — Separar extração de raciocínio. Caracterizar o gênero por agregação determinística sobre extrações por instância, e não por raciocínio holístico de uma LLM sobre o corpus inteiro, garantindo reprodutibilidade e auditabilidade.
-- DP3 — Diagnóstico referenciado ao alvo. Expressar todo retorno como desvio em relação a uma especificação explícita e versionável, e não como julgamento de qualidade absoluta.
-- DP4 — Conformidade como consciência, não imposição. Tornar a convenção visível para que o autor decida segui-la ou rompê-la deliberadamente, mitigando o risco de engessamento da escrita.
-- DP5 — Alocação de recurso por natureza da tarefa. Destinar tarefas procedimentais e repetitivas a modelos locais e o raciocínio complexo a modelos comerciais.
-
-% > [Figura 3 — Arquitetura de referência em duas fases]
-% > Melhor local para inserção: nesta seção, após a apresentação dos princípios de forma e função. Diagrama do pipeline: Fase A (corpus → conversão → extração local → agregação → base de conhecimento por trilha) e Fase B (manuscrito → mesma conversão/extração → verificação pelo modelo forte → relatório/tutor). Substitui e amplia a "Figura 1. Arquitetura de Referência" do desenho original.
-% > 
-% > Figura 3. Arquitetura de referência do artefato, em duas fases. Elaboração própria.
-
-\section{Os agentes especializados e o orquestrador}
-
-O estágio de verificação e diagnóstico é realizado por agentes especializados, herdados e ampliados a partir do desenho original, agora subordinados à especificação de gênero.
-
-O Agente de Verificação de Referências verifica a existência e a validade das referências, consultando Semantic Scholar e CrossRef, e identifica referências não localizadas e inconsistências. Por envolver consultas repetitivas e estruturadas, executa em modelo mistral \cite{mistral} em ambiente local , reduzindo custos.
-
-O Agente de Verificação de Novidade avalia a originalidade da contribuição frente à literatura, em três etapas: extração das alegações de contribuição, recuperação e ranqueamento de trabalhos relacionados, e análise comparativa com o estado da arte, inspirando-se no pipeline de raciocínio estruturado de DeepReview \cite{DeepReview}.
-
-O Agente de Verificação de Confiabilidade examina a coerência interna e o rigor metodológico por meio de uma cadeia de evidências, percorrendo verificação metodológica, verificação experimental e análise abrangente, coletando evidências textuais e atribuindo níveis de confiança a cada fragilidade.
-
-O Agente Orquestrador coordena a execução dos demais, consolida as avaliações parciais, resolve contradições e produz o relatório final. É também o orquestrador que confronta o manuscrito com a especificação da trilha-alvo (DP3) e, no modo tutor, executa o roteamento de gênero.
-
-\section{Modo revisor e modo tutor}
-
-O artefato opera em dois modos sobre o mesmo núcleo. No modo revisor, produz um relatório de diagnóstico: resumo do trabalho, análise de novidade, verificação de confiabilidade com evidências, validação de referências, pontos fortes e fracos e recomendações acionáveis, todos referenciados à especificação da trilha. No modo tutor, acrescenta duas funções voltadas à formação: a orientação explícita sobre como aproximar o manuscrito do gênero-alvo e o roteamento de gênero — a indicação da trilha cujo perfil melhor se ajusta ao manuscrito, classificando a instância dentro do repertório de gêneros da conferência. Essa segunda função, possível apenas porque o escopo abrange todas as trilhas do SBSI, ataca uma das causas mais frequentes de rejeição precoce: o bom artigo submetido à trilha errada.
-
-\section{Mutabilidade do artefato}
-
-A teoria prevê mutabilidade em três eixos, o que constitui força e não limitação. Como os gêneros mudam com a comunidade, a especificação de cada trilha deve ser re-derivável a cada edição da conferência. Novas trilhas ou uma nova conferência entram como novas especificações, sem rearquitetar o sistema. E o mesmo núcleo serve aos modos revisor e tutor, demonstrando variação de função sem mudança de forma.
-
-\section{Proposições testáveis}
-
-As proposições que o estudo de avaliação buscará examinar são apresentadas na Tabela \ref{tab:proposicoes}.
-
-Tabela de Proposições testáveis da teoria de design.
+Tomando como base a fundamentação teória e a revisão de literatura, foram definidos os requisitos do artefato, como esta pesquisa foi conduzida sob o Design Science Research, os requisitos do artefato não são levantados junto a usuários como em desenvolvimento convencional: derivam da base de conhecimento que justifica a intervenção \cite{Hevner2004}. Cabe explicitar essa derivação, uma vez que é dela que o artefato retira tanto o que deve observar quanto os critérios pelos quais seu comportamento será julgado. A Tabela~\ref{tab:requisitos} sintetiza a correspondência.
 
 \begin{table}[H]
 \centering
-\caption{Proposições}
-\label{tab:proposicoes}
+\caption{Derivação dos requisitos de projeto a partir da fundamentação teórica}
+\label{tab:requisitos}
 \small
-\begin{tabular}{l p{11.5cm}}
-\toprule
-Código & Proposição \\
-\midrule
-P1 & Manuscritos orientados pelo modo tutor apresentam maior conformidade de gênero à trilha-alvo do que suas versões originais. \\
-P2 & Os desvios de conformidade apontados pelo artefato correlacionam-se com motivos reais de rejeição precoce observados na comunidade. \\
-P3 & Há convergência parcial entre a avaliação de conformidade do artefato e a percepção de revisores humanos experientes da trilha. \\
-P4 & O retorno referenciado ao alvo é percebido como mais acionável do que o retorno de qualidade genérico. \\
-P5 & O roteamento de gênero classifica corretamente a trilha mais adequada a um manuscrito em taxa superior ao acaso. \\
-P6 & A separação entre extração e agregação produz especificações reprodutíveis a custo linear no tamanho do corpus. \\
-\bottomrule
+\begin{tabular}{|p{6.4cm}|p{7.4cm}|}
+\hline
+\textbf{Origem teórica} & \textbf{Requisito de projeto} \\
+\hline
+Regras de gênero são tácitas e distribuídas nos exemplares \cite{GenresOrgComm} & A especificação de gênero deve ser derivada do corpus de artigos aceitos, e não estipulada a priori pelo pesquisador \\
+\hline
+O reconhecimento exige regras distintivas \textit{suficientes}, não a totalidade delas \cite{GenresOrgComm} & 
+A verificação a existência e inexistência das regras de gênero.  \\
+\hline
+Gêneros variam por comunidade e por nível de abstração \cite{GenreRepertoire} & A especificação deve ser parametrizada por trilha, e não única para a conferência \\
+\hline
+O \textbf{move} é delimitado por função retórica, e não por extensão \cite{GenreAnalysis} & A unidade de segmentação e de comparação do sistema deve ser o \textbf{move} \\
+\hline
+Elementos são obrigatórios, opcionais ou prováveis em determinadas áreas \cite{ResearchGenres} & O retorno deve ser pautado pelos elementos, sem tratar ausência de elemento opcional como falha \\
+\hline
+A dimensão do propósito permanece pressuposta na chamada \cite{GenreSystems} & O artefato deve tornar explícito o que a chamada não enuncia, complementando-a e não a repetindo \\
+\hline
+Usuários incorporam orientação de modelos de linguagem sem análise crítica \cite{WhyandWhen} & Toda afirmação sobre o texto deve ser rastreável, ter evidência textual e exemplares verificáveis \\
+\hline
+Modelos classificam erroneamente falhas e sofrem influência de recomendações fortes \cite{WhereLLMWrong} & Decisões de conformidade devem ser determinísticas sempre baseadas nas regras de gênero. \\
+\hline
 \end{tabular}
 \end{table}
 
-\section{Conhecimento justificador e instanciação expositiva}
+% \section{Princípios de projeto}
+% \label{sec:principios}
 
-O conhecimento justificador da teoria de design compõe-se das três camadas do Capítulo 2: a Teoria de Gêneros como kernel sociotécnica; a análise de moves como ponte de operacionalização; e a teoria de compiladores como justificação computacional da arquitetura. A instanciação expositiva é o protótipo aplicado ao corpus completo do SBSI, descrito no Capítulo 5, que cumpre o papel de demonstrar a viabilidade da teoria e servir de base empírica para as proposições da Tabela \ref{tab:proposicoes}..
+% Os princípios enunciados a seguir governam as decisões arquiteturais apresentadas na sequência. Em termos de Design Science Research, eles não são detalhe de implementação: constituem parte da contribuição de conhecimento do trabalho, uma vez que se pretendem generalizáveis a outros tutores de gênero para além do caso tomado como aplicação.
+
+% \begin{description}
+
+% \item[PP1 --- Especificação derivada, não estipulada.] O que constitui o gênero de uma trilha é determinado por observação do corpus de artigos aceitos, e não por definição prévia do pesquisador ou por transcrição da chamada de trabalhos. Ao modelo CARS \cite{ResearchGenres} cabe fornecer o vocabulário de funções retóricas; o estatuto de cada função naquela trilha é medido, e não assumido.
+
+% \item[PP2 --- Simetria representacional.] O corpus e o manuscrito submetido são processados pelo mesmo procedimento de extração, produzindo representações comensuráveis. A verificação de conformidade é, então, comparação entre objetos de mesma natureza, e não confronto entre uma especificação e um texto bruto. Esse princípio é o que torna a comparação defensável, pois qualquer viés do extrator incide igualmente sobre os dois lados.
+
+% \item[PP3 --- Separação entre agregação determinística e inferência.] A identificação de funções retóricas em texto é tarefa de interpretação linguística e cabe ao modelo de linguagem. A consolidação estatística do corpus, a comparação com limiares e a decisão de conformidade são operações de contagem e cabem a código determinístico. O modelo de linguagem não é consultado sobre o corpus como um todo, nem sobre se um manuscrito está ou não em conformidade.
+
+% \item[PP4 --- Suficiência, não completude.] A verificação apura se o manuscrito invoca regras distintivas suficientes para o reconhecimento, e não se ele realiza todas as regras observadas no corpus. Uma instância pode legitimamente deixar de invocar parte do repertório sem perder pertencimento \cite{GenresOrgComm}. O artefato não persegue conformidade integral, e o texto entregue ao autor explicita essa distinção.
+
+% \item[PP5 --- Ancoragem em evidência.] Toda observação aponta para o trecho do manuscrito que a motivou, ou declara explicitamente a ausência de trecho correspondente, e toda orientação exibe exemplares reais de artigos aceitos, identificados por procedência. Não há afirmação sobre o texto sem localização no texto.
+
+% \item[PP6 --- Orientação sem substituição autoral.] O artefato diagnostica e orienta; não reescreve trechos nem oferece redação alternativa pronta para incorporação. A restrição responde ao achado de \citeonline{WhyandWhen}, segundo o qual usuários tendem a assumir respostas de modelos de linguagem sem submetê-las a exame, e é coerente com o propósito formativo: pretende-se que o autor internalize a regra de gênero, e não que seu texto seja corrigido por terceiro.
+
+% \end{description}
+
+\section{Visão geral da arquitetura}
+\label{sec:arquitetura}
+
+A arquitetura organiza-se em dois fluxos de processamento, que funcionam de forma complementar uma ao outro e com forte dependência. O \textbf{Fluxo A} é executado uma vez por trilha, em lote, e tem por o objetivo determinar a especificação do Gênero. O \textbf{Fluxo B} é executado a cada consulta do autor e consome essa especificação. A Figura~\ref{fig:arquitetura} apresenta a organização geral.
+
+No Fluxo A não há verificação de conformidade, sua responsabilidade é o corpus e fazer uma análise de género capaz de identificar caracteristicas no textos suficientes para propor a regras de género. A conformidade de um menuscrito só passa a existir no Fluxo B, quando confrontado com a especificação previamente constituída. 
+O Fluxo A institui o padrão; o Fluxo B avalia com base neste padrão. Sem o Fluxo A, o Fluxo B não tem como operar. Sem o Fluxo B, o Fluxo A não tem utilidade prática.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  every node/.style = {font=\footnotesize},
+  proc/.style  = {rectangle, draw, rounded corners=2pt, minimum height=9mm,
+                  text width=24mm, align=center, inner sep=2pt},
+  det/.style   = {proc, fill=black!5},
+  inf/.style   = {proc, fill=black!20},
+  data/.style  = {rectangle, draw, dashed, minimum height=9mm,
+                  text width=24mm, align=center, inner sep=2pt},
+  store/.style = {rectangle, draw, dashed, minimum height=9mm,
+                  text width=56mm, align=center, inner sep=3pt},
+  seta/.style  = {-{Latex[length=2mm]}, thick},
+  banda/.style = {font=\footnotesize\itshape, anchor=west}
+]
+ 
+% ------------------------------------------------------------------
+% Fluxo A --- construção da Especificação de Gênero (lote, por trilha)
+% ------------------------------------------------------------------
+\node[banda] at (-0.6,1.15) {Fluxo A --- por trilha, em lote};
+ 
+\node[data] (corpus) at (0,0)    {Corpus da trilha\\[-1pt] \scriptsize (artigos aceitos)};
+\node[det]  (a1)     at (3.1,0)  {\textbf{A1}\\[-1pt] Ingestão e Conversão\\ dos documentos};
+\node[inf]  (a2)     at (6.2,0)  {\textbf{A2}\\[-1pt] Extração de\\ \textbf{moves}};
+\node[det]  (a3)     at (9.3,0)  {\textbf{A3}\\[-1pt] Agregação\\ determinística};
+\node[det]  (a4)     at (12.4,0) {\textbf{A4}\\[-1pt] Derivação das\\ regras de gênero};
+ 
+\draw[seta] (corpus) -- (a1);
+\draw[seta] (a1) -- (a2);
+\draw[seta] (a2) -- (a3);
+\draw[seta] (a3) -- (a4);
+ 
+% ------------------------------------------------------------------
+% Artefato de conhecimento intermediário
+% ------------------------------------------------------------------
+\node[store] (espec) at (7.75,-2.0)
+  {\textbf{Especificação de Gênero}\\[-1pt]
+   \scriptsize regras de gênero \,$+$\, segmentos rotulados};
+ 
+\draw[seta] (a4.south) .. controls +(0,-1.1) and +(1.6,0) .. (espec.east);
+ 
+% ------------------------------------------------------------------
+% Fluxo B --- Modo Tutor (por consulta)
+% ------------------------------------------------------------------
+\node[banda] at (-0.6,-5.15) {Fluxo B --- por consulta (Modo Tutor)};
+ 
+\node[data] (manu) at (0,-4)    {Manuscrito\\[-1pt] \scriptsize do autor};
+\node[det]  (b12)  at (3.1,-4)  {\textbf{B1--B2}\\[-1pt] Ingestão e extração\\ \scriptsize (idem A1--A2)};
+\node[det]  (b3)   at (6.2,-4)  {\textbf{B3}\\[-1pt] Verificação de\\ conformidade};
+\node[inf]  (b4)   at (9.3,-4)  {\textbf{B4}\\[-1pt] Composição\\ do retorno};
+\node[data] (feed) at (12.4,-4) {Retorno\\[-1pt] ao autor};
+ 
+\draw[seta] (manu) -- (b12);
+\draw[seta] (b12) -- (b3);
+\draw[seta] (b3) -- (b4);
+\draw[seta] (b4) -- (feed);
+ 
+\draw[seta] (espec.south -| b3.north) -- (b3.north);
+\draw[seta] (espec.south -| b4.north) -- (b4.north);
+ 
+% consulta à especificação, sem manuscrito
+\draw[seta, dotted] (espec.west) .. controls +(-2.2,0) and +(0,1.4) .. (b12.north);
+ 
+% ------------------------------------------------------------------
+% Legenda
+% ------------------------------------------------------------------
+\node[det,  minimum height=4mm, text width=3mm] (lg1) at (3.3,-6.1) {};
+\node[anchor=west, font=\scriptsize] at (3.6,-6.1) {determinístico};
+\node[inf,  minimum height=4mm, text width=3mm] (lg2) at (7.0,-6.1) {};
+\node[anchor=west, font=\scriptsize] at (7.3,-6.1) {inferencial (LLM)};
+\node[data, minimum height=4mm, text width=3mm] (lg3) at (10.9,-6.1) {};
+\node[anchor=west, font=\scriptsize] at (11.2,-6.1) {dado};
+ 
+\end{tikzpicture}
+\caption{Arquitetura do artefato. O Fluxo A é executado uma vez por trilha e produz a
+Especificação de Gênero; o Fluxo B é executado a cada consulta e a consome. A seta pontilhada
+representa a consulta à especificação sem manuscrito. Blocos claros são determinísticos;
+o bloco escuro envolve inferência de modelo de linguagem, aplicada de forma idêntica ao corpus
+(A2) e ao manuscrito (B1--B2).}
+\label{fig:arquitetura}
+\end{figure}
+
+\section{Fluxo A: construção da Especificação de Gênero}
+\label{sec:fluxo-a}
+
+\subsection*{A1. Ingestão dos documentos}
+
+A ingestão dos documentos é a etapa de preparação do corpus da trilha, que por sua vez precisa esteja definido antes da execução para que seja prossível o processamento. Por Definição, o corpus é composto por artigos completos aceitos em uma trilha-alvo, e não por submissões rejeitadas ou por artigos de outras trilhas. A ingestão é conversão de formatos.
+
+O Corpus definido na fase de desenvolvimenteo deste artefato foram todos os artigos completos e publicados nos \textit{Anais do Anais do XXII Simpósio Brasileiro de Sistemas de Informação - SBSI 2026} e \textit{Anais do XXII Encontro Nacional de Inteligência Artificial e Computacional - ENIAC 2025}, coletados através do SBC OpenLib \cite{solsbc} e organizados em pastas, totalizando 67 artigos do SBSI 2026 e 177 artigos do ENIAC 2025, definindo assim o corpus e as trilhas-alvo.
+
+Os artigos da trilha-alvo foram obtidos no formato PDF, e por sua vez são convertidos com Docling \cite{Docling}, preservando-se toda a sua estrutura original são convertidos para Markdown e Json. Esse objeto fornece segmentação de seções, tipagem de itens e contagem de tabelas e figuras sem recurso a expressões regulares sobre texto corrido, o que reduz a fragilidade da etapa. Aplica-se na sequência um função de correção de acentuação característicos de documentos produzidos por composição \LaTeX{} em português, frequentes no acervo nacional. Estas correções buscam uniformizar a representação de caracteres acentuados, e outros caracteres especiais da lingua portuguesa. Importante ressaltar que a etapa de ingestão não envolve inferência de modelo de linguagem (LLM), e portanto é determinística , auditável e independente. 
+
+
+\subsection*{A2. Extração de \textbf{moves}}
+
+Cada artigo é submetido individualmente a um modelo de LLM, que rotula os segmentos da introdução segundo o vocabulário do modelo CARS revisado \cite{ResearchGenres}, devolvendo saída em esquema estruturado e validado.
+A extração é feita por artigo, nunca sobre o corpus agregado. Cada chamada opera sobre um contexto reduzido e verificável, o que mantém o custo computacional linear no tamanho do corpus e, sobretudo, permite auditoria individual e reprocessamento, garantindo independência no processo.
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=json, basicstyle=\scriptsize\ttfamily, caption={Exemplo do esquema estruturado}, label={lst:trilha}]
+{
+  "id_artigo": "42018",
+  "trilha": "SBSI-2026",
+  "titulo": "agentes de ia na avaliacao cientifica uma revisao automatizada de publicacoes em periodicos brasileiros",
+  "secoes_presentes": [
+    "introducao",
+    "contexto_e_problema",
+    "metodologia",
+    "solucao_proposta",
+    "trabalhos_relacionados",
+    "resultados",
+    "referencias"
+  ],
+  "n_referencias": 7,
+  "n_figuras": 1,
+  "n_tabelas": 0,
+  "n_paginas": 6,
+  "palavras_chave": [],
+  "tipo_contribuicao": "artefato",
+  "tem_questao_pesquisa": true,
+  "tipo_avaliacao": "estudo_de_caso",
+  "moves_cars": {
+    "estabelecer_territorio": {
+      "presente": true,
+      "evidencia": "O crescimento exponencial da producao cientifica nas ultimas decadas tem intensificado desafios estruturais do sistema de revisao"
+    },
+    "apontar_lacuna": {
+      "presente": true,
+      "evidencia": "Esses fatores causam um impacto na eficiencia do processo cientifico e a formacao de novos pesquisadores"
+    },
+    "ocupar_nicho": {
+      "presente": true,
+      "evidencia": "Nesse contexto, surge a oportunidade de investigar arquiteturas de agentes de IA como instrumentos de apoio a revisao cientifica"
+    }
+  }
+)
+\end{lstlisting}
+\vspace{2pt}
+{\footnotesize\textit{Nota: Este é apenas um exemplo ilustrativo, não faz parte do corpus citado como exemplo na seção anterior(A2).}}
+\end{minipage}
+
+
+\subsection*{A3. Agregação determinística}
+
+Os registros produzidos em A1 e A2 são consolidados em distribuições de frequência por trilha: proporção de artigos em que cada \textbf{move} ocorre, ordem modal de ocorrência, coocorrência de \textit{steps} e estatísticas estruturais. Nesta etapa não é nenhuma inferência de modelo de LLM, permanecendo integralmente determinística e auditável. A agregação produz a base de conhecimento que sustenta a especificação de gênero, e dela decorrem as regras de gênero que o Modo Tutor aplica.
+
+
+\subsection*{A4. Derivação das regras de gênero}
+
+Uma distribuição de frequências descreve o corpus, mas não pode ser confrontada com um manuscrito: falta-lhe a forma de um predicado. A etapa A4 realiza essa tradução, e é ela que habilita o Fluxo A ao Fluxo B e viabiliza o Modo Tutor do artefato.
+
+O objeto produzido não é arbitrário: ele decorre da própria fundamentação. \citeonline{GenresOrgComm} sustentam que gêneros são encenados por meio de \textbf{regras de gênero}, que associam elementos apropriados de forma e substância a situações recorrentes, e que tais regras operam com frequência de modo tácito, por socialização e hábito. O que o Fluxo A realiza, nestes termos, é a explicitação dessas regras a partir do único registro em que elas se encontram materialmente depositadas, que é o conjunto de textos que a comunidade reconheceu. 
+
+% Cada regra derivada é composta pelos elementos descritos na Tabela~\ref{tab:regra}.
+
+% \begin{table}[H]
+% \centering
+% \caption{Composição de uma regra de gênero}
+% \label{tab:regra}
+% \small
+% \begin{tabular}{|p{2.6cm}|p{7.2cm}|p{3.4cm}|}
+% \hline
+% \textbf{Elemento} & \textbf{Conteúdo} & \textbf{Origem} \\
+% \hline
+% Dimensão & Dimensão do sistema de gêneros a que a regra se refere & \cite{GenreSystems} \\
+% \hline
+% Predicado & Condição verificável sobre a representação do manuscrito & A3 \\
+% \hline
+% Estatuto & Esperada, frequente, opcional ou rara na trilha & Limiar aplicado a A4 \\
+% % \hline
+% % Suporte & Número de artigos aceitos que realizam a regra & A4 \\
+% \hline
+% Função & Propósito comunicativo que o elemento cumpre no gênero & \cite{ResearchGenres} \\
+% \hline
+% Exemplares & Segmentos que realizam a regra no corpus & A5 \\
+% \hline
+% \end{tabular}
+% \end{table}
+
+
+% \section{A Especificação de Gênero}
+% \label{sec:especificacao}
+
+% A Especificação de Gênero é o base produzida pelo Fluxo A e consumido pelo Fluxo B. Organiza-se em três camadas. A \textbf{camada estrutural} reúne as regularidades verificáveis por inspeção, correspondentes às dimensões explicitamente codificadas do sistema de gêneros. A \textbf{camada retórica} contém o modelo de \textbf{moves} da trilha, com o estatuto empírico de cada elemento. A \textbf{camada de exemplares} reúne os segmentos textuais rotulados que sustentam a demonstração.
+
+% A camada retórica contém a operação conceitualmente mais relevante do artefato. \citeonline{ResearchGenres} classificando os elementos do modelo CARS como obrigatórios, opcionais ou prováveis em determinadas áreas. O artefato aqui proposto não importa essa classificação, ele a mede no corpus da trilha analisada. A categoria dos elementos prováveis em determinadas áreas, com que o autor marca aquilo que varia conforme o campo disciplinar, deixa assim de ser uma advertência sobre variação e passa a ser resolvida empiricamente para a área em questão.
+
+% Cabe explicitar, ainda, que a agregação produzida em A4 serve a três finalidades distintas, das quais apenas a primeira é normativa. A finalidade \textbf{normativa} alimenta as regras de estatuto esperado, cuja não realização gera observação no Modo Tutor. A finalidade \textbf{descritiva} sustenta o posicionamento do manuscrito em relação ao repertório da comunidade, apresentado como contexto comparativo e sem juízo: informar que os artigos aceitos na trilha apresentam determinada mediana de referências, ou que certa proporção deles enuncia questão de pesquisa explícita, orienta o autor sem lhe imputar falha. A finalidade \textbf{demonstrativa} fornece os exemplares. Para o pesquisador em início de carreira, a segunda finalidade é possivelmente a de maior valor formativo, pois revela o padrão da comunidade em vez de apontar o desvio individual.
+
+\section{Fluxo B: o Modo Tutor}
+\label{sec:fluxo-b}
+
+O Modo Tutor é a camada em que o autor usuario do artefatosubmete seu artigo para ser avaliado. Neste momento um arquivo é submetido ao artefato e uma trilha é previamente definida como parametro. O artefato não pressupõe trilha-alvo e nem possui uma definição padrão(Default). Ao fim da execução o autor recebe a especificação renderizada em linguagem natural com o resultado da análise e orientações: o que aquela trilha espera, com que frequência cada elemento ocorre entre os artigos aceitos, que função cada um cumpre e como artigos reais os realizaram. 
+
+O tutor não sugere modificações no manuscrito, nem reescreve trechos, nem oferece redação alternativa pronta para incorporação. A restrição responde ao achado de \citeonline{WhyandWhen}, segundo o qual usuários tendem a assumir respostas de modelos de linguagem sem submetê-las a exame, e é coerente com o propósito formativo: pretende-se que o autor internalize a regra de gênero, e não que seu texto seja corrigido por uma IA, cabe ao autor decidir se o resultado é relevante e seus acionáveis.
+
+
+% A \textbf{verificação de manuscrito} compreende as etapas descritas a seguir.
+
+\subsection*{B1--B2. Ingestão e extração}
+
+O manuscrito percorre o mesmo procedimento de A1 a A3, com o mesmo conversor, o mesmo extrator e o mesmo esquema de saída, ou seja o artigo precisa ser convertido para Markdown e Json com o mesmo conversor.
+
+\subsection*{B3. Verificação de conformidade}
+
+Cada regra da Especificação de Gênero tem seu predicado avaliado contra a  manuscrito que está sendo analisado. A operação é determinística e produz dois conjuntos: as regras \textbf{invocadas} pelo manuscrito e as regras \textbf{não invocadas}. Sobre o segundo conjunto aplica-se o filtro de estatuto, de modo que apenas as regras de estatuto esperado dão origem a observação, ao passo que a não realização de regras opcionais permanece sem consequência.
+
+O resultado final da etapa não apresenta pontuação. A recusa de emitir score agregado de conformidade é proposital, dado que uma nota converteria retorno formativo em julgamento e aproximaria o artefato do papel de revisor, além de atribuir uma responsabilidade que o artefato não tem. O propósito do Modo Tutor é orientar um pesquisador iniciante, não inferir sobre aceitação ou rejeição. 
+
+
+% \subsection*{B4. Composição do retorno}
+
+
+
+% Cada elemento a ser comunicado, regra invocada ou regra esperada não realizada, é convertido em texto por um modelo LLM, cujo contexto recebido corresponde ou não as regras de gênero. Ao modelo cabe a redação; não lhe cabe decidir o que está ou não em conformidade, decisão já tomada em B3, nem produzir redação substituta para o texto do autor.
+
+% \begin{table}[H]
+% \centering
+% \caption{Distribuição de responsabilidades entre componentes determinísticos e inferenciais}
+% \label{tab:responsabilidades}
+% \small
+% \begin{tabular}{|p{6.2cm}|p{3.0cm}|p{4.2cm}|}
+% \hline
+% \textbf{Etapa} & \textbf{Natureza} & \textbf{Executor} \\
+% \hline
+% A1 Ingestão documental & Determinística & Conversor estrutural \\
+% \hline
+% A2 Segmentação estrutural & Determinística & Código \\
+% \hline
+% A3 Extração de \textbf{moves} & Inferencial & Modelo local com esquema validado \\
+% \hline
+% A4 Agregação e estatuto empírico & Determinística & Código \\
+% \hline
+% A5 Persistência e consulta de exemplares & Determinística & Consulta estruturada \\
+% \hline
+% A6 Derivação das regras de gênero & Determinística & Código \\
+% \hline
+% B1--B2 Ingestão e extração do manuscrito & Idem A1--A3 & Mesmos componentes (PP2) \\
+% \hline
+% B3 Decisão de conformidade & Determinística & Código \\
+% \hline
+% B4 Redação do retorno & Inferencial & Modelo de maior capacidade \\
+% \hline
+% \end{tabular}
+% \end{table}
+
+\section{Composição do retorno ao autor}
+\label{sec:retorno}
+
+O retorno entregue ao autor compõe-se dos seguintes elementos.
+
+\textbf{Reconhecimento das regras invocadas}: aquilo que o manuscrito submetido realiza e a função que cumpre perante a regra de gêneros e quais regras não são invocadas. O teste de reconhecimento formulado em \cite{GenresOrgComm} incide sobre a invocação de regras distintivas suficientes, de modo que as regras efetivamente invocadas constituem metade da evidência produzida pela verificação. Ao propósito formativo, informa ao autor quais de suas escolhas foram adequadas e estão aderentes a trilha tal como as regras ausentes.
+
+O artefato expõe a regra de gênero e a evidência de sua vigência na comunidade, acelerando uma enculturação que de outro modo dependeria de exposição prolongada às práticas do grupo.
+
+O quarto elemento é o \textbf{registro informativo} da variação não observada no corpus.
+
+\begin{table}[H]
+\centering
+\caption{Tipologia das divergências e seu tratamento no Modo Tutor}
+\label{tab:tipologia}
+\small
+\begin{tabular}{|p{4.0cm}|p{4.6cm}|p{4.8cm}|}
+\hline
+\textbf{Tipo} & \textbf{Fundamento} & \textbf{Tratamento} \\
+\hline
+Regra esperada não realizada & Regra distintiva não invocada \cite{GenresOrgComm} & Observação prioritária, com função e exemplares \\
+\hline
+Realização parcial & \textbf{Move} presente sem os \textit{steps} típicos \cite{ResearchGenres} & Observação com indicação do que a função requer \\
+\hline
+Desvio de ordem & Sequência divergente da ordem modal da trilha & Observação com ressalva de que a ordem admite variação \\
+\hline
+Desvio estrutural & Divergência na camada estrutural & Observação objetiva, verificável pelo autor \\
+\hline
+Regra opcional não realizada & Escolha autoral legítima \cite{ResearchGenres} & Não gera observação \\
+\hline
+Elemento sem correspondência na especificação & Variação não observada no corpus & Registro informativo, nunca corretivo \\
+\hline
+\end{tabular}
+\end{table}
+
+% As duas últimas linhas da tabela são tão constitutivas do projeto quanto as primeiras. Suprimir observação sobre elemento opcional evita o ruído que caracteriza pareceres genéricos, e tratar como informativa a variação não observada preserva a possibilidade de inovação retórica, que um sistema estritamente normativo penalizaria.
+
+% Cabe, por fim, delimitar o que o retorno pode afirmar. O artefato pode declarar que determinada trilha realiza certo elemento em dada proporção de seus artigos aceitos e que o manuscrito não o realiza. Não pode declarar que essa ausência causará rejeição. 
+
+\section{Delimitações e riscos de projeto}
+\label{sec:limitacoes}
+
+\textbf{Viés de sobrevivência do corpus.} O corpus é composto exclusivamente por artigos aceitos. A especificação modela o gênero tal como realizado pelos textos aprovados, e não a fronteira que separa aceitação de rejeição. O artefato pode afirmar que um manuscrito diverge do padrão dos aceitos. Não pode afirmar que tal divergência causaria sua rejeição. A distinção deve ser preservada na redação do retorno ao autor e na formulação dos resultados da avaliação.
+
+\textbf{Dependência da qualidade da extração.} Toda a cadeia repousa sobre a acurácia do rotulador de A2. É esta a razão pela qual a validação técnica preliminar, visando medir a concordância entre os rótulos produzidos pelo modelo de linguagem e uma anotação manual de referência, em amostra reduzida, antes de qualquer processamento de um corpus mais amplo.
+
+% \textbf{Cobertura da camada retórica.} O modelo CARS descreve a organização retórica de introduções de artigos científicos. A camada retórica do protótipo restringe-se à introdução do manuscrito, ao passo que a camada estrutural cobre o artigo integralmente. A extensão a outras seções exigiria modelos de \textbf{moves} próprios, cuja construção constitui trabalho futuro.
+
+\section{Síntese}
+\label{sec:sintese-solucao}
+
+O artefato proposto converte conhecimento tácito de uma comunidade em especificação verificável por meio de uma cadeia de operações auditáveis: extrai funções retóricas dos artigos aceitos de uma trilha com um modelo LLM, consolida essas extrações por agregação determinística, deriva dessa agregação um conjunto de regras de gênero explicitadas e, de posse dessas regras, verifica o manuscrito do autor, comunicando tanto o que ele realiza quanto o que deixa de realizar, sempre ancorado em evidência textual e em exemplares reais.
+
+A separação entre o que é inferido e o que é contado, a simetria de tratamento entre corpus e manuscrito, a explicitação das regras como objeto intermediário e o critério de suficiência em lugar de completude são as decisões que distinguem esta proposta de um verificador normativo e a mantêm coerente com a teoria que a fundamenta. 
