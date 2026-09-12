@@ -116,7 +116,8 @@ uma tensão concreta do projeto e vem acompanhado de sua justificativa, conforme
 
 \item[PP2 --- Simetria representacional.] O corpus e o manuscrito submetido percorrem o mesmo procedimento de conversão e extração, produzindo representações comensuráveis. A verificação de conformidade torna-se então comparação entre objetos de mesma natureza, e não confronto entre uma especificação e um texto bruto. É esse princípio que torna a comparação defensável: qualquer viés do extrator incide igualmente sobre os dois lados.
 
-\item[PP3 --- Separação entre inferência e contagem.] Identificar funções retóricas em texto é tarefa de interpretação linguística e cabe ao modelo de linguagem. Consolidar o corpus, comparar valores com limiares e decidir sobre conformidade são operações de contagem e cabem a código determinístico. O modelo nunca é consultado sobre o corpus como um todo, nem sobre se um manuscrito está ou não em conformidade.
+\item[PP3 --- Separação entre inferência e contagem.] Identificar funções retóricas em texto é tarefa de interpretação linguística e cabe ao modelo de linguagem. Consolidar o corpus, comparar valores com limiares e decidir sobre conformidade são operações de contagem e cabem a código determinístico.
+%O modelo nunca é consultado sobre o corpus como um todo, nem sobre se um manuscrito está ou não em conformidade. Onde o modelo é consultado fora da extração, sua saída é descritiva e não retroage sobre a especificação.
 
 \item[PP4 --- Suficiência, não completude.] A verificação apura se o manuscrito invoca regras distintivas suficientes para o reconhecimento, e não se realiza todas as regras observadas no corpus. Uma instância pode legitimamente deixar de invocar parte do repertório sem perder pertencimento \cite{GenresOrgComm}. O artefato não persegue conformidade integral, e o texto entregue ao autor explicita essa diferença.
 
@@ -380,7 +381,7 @@ Uma distribuição de frequências descreve o corpus, mas não pode ser confront
 
 O objeto produzido decorre da própria fundamentação. \citeonline{GenresOrgComm} sustentam que gêneros são encenados por meio de \textbf{regras de gênero}, que associam elementos apropriados de forma e substância a situações recorrentes, e que tais regras operam com frequência de modo tácito, por socialização e hábito. O que o Fluxo A realiza, nesses termos, é a explicitação dessas regras a partir do único registro em que elas se encontram materialmente depositadas: o conjunto de textos que a comunidade reconheceu.
 
-Cada regra derivada é um objeto composto, descrito na Tabela~\ref{tab:regra}. Sua forma não é livre. Cada elemento existe porque um requisito da Seção~\ref{sec:requisitos} o exige: o predicado atende à necessidade de decisão determinística; o estatuto, à distinção entre ausência relevante e escolha autoral; a função, à exigência de que o retorno explique o propósito comunicativo em vez de apenas registrar a falta; os exemplares, à ancoragem em evidência de PP5.
+Cada regra derivada é um objeto composto, descrito na Tabela~\ref{tab:regra}. Sua forma não é livre. Cada elemento existe porque um requisito da Seção~\ref{sec:requisitos} o exige: o predicado atende à necessidade de decisão determinística; o estatuto, à distinção entre ausência relevante e escolha autoral; a função, à exigência de que o retorno explique o propósito comunicativo em vez de apenas registrar a falta; os exemplares, à ancoragem em evidência de PP5. Predicado, estatuto e suporte resultam de contagem sobre os registros de A2; a função é o único elemento enunciado por modelo de linguagem, uma vez por regra e revisável antes de qualquer uso.
 
 \begin{table}[H]
 \centering
@@ -395,11 +396,11 @@ Dimensão & Dimensão do sistema de gêneros a que a regra se refere & \cite{Gen
 \hline
 Predicado & Condição verificável sobre a representação do manuscrito & A3 \\
 \hline
-Estatuto & Esperada, frequente ou opcional na trilha & Limiar aplicado em A3 \\
+Estatuto & Obrigatória, PDA ou opcional na trilha & Limiares aplicados em A3 \\
 \hline
 Suporte & Proporção de artigos aceitos que realizam a regra & A3 \\
 \hline
-Função & Propósito comunicativo que o elemento cumpre no gênero & \cite{ResearchGenres} \\
+Função & Propósito comunicativo que o elemento cumpre no gênero & A4, por inferência \\
 \hline
 Exemplares & Segmentos do corpus que realizam a regra & A2 \\
 \hline
