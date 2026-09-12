@@ -57,6 +57,7 @@
 \usepackage{lastpage}
 %\usepackage[titles]{tocloft}
 \usepackage{tocbasic}
+\usepackage{changepage}
 
 
 \usepackage{tikz}
@@ -280,7 +281,7 @@
     %Inserir novo capíulo aqui. Um arquivo por linha
     \input{02_Textual/C1_Introducao}
     \input{02_Textual/C2_Fundamentacao}
-    \input{02_Textual/C3_Levantamento_Literatura}
+    \input{02_Textual/C3_trabalhos_relacionados}
     \input{02_Textual/C4_solucao_proposta}
     % \input{02_Textual/C5_Construcao_artefato}
     \input{02_Textual/C6_Metodo_avaliacao}
@@ -302,9 +303,9 @@
         {\normalfont\huge\bfseries\centering}{\centering\chaptertitlename\ \thechapter}{20pt}{\large}
         \titlespacing*{\chapter}{0pt}{50pt}{40pt}
     
-    % \appendix
-    % %Inserir novo apêndice aqui. Um arquivo por linha
-    % \include{03_Pos_Textual/1_Apendice}
+    \appendix
+    %Inserir novo apêndice aqui. Um arquivo por linha
+    \include{03_Pos_Textual/1_Apendice}
     % \include{03_Pos_Textual/2_Apendice}
     
 \end{document}
