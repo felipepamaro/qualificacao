@@ -1,29 +1,75 @@
-\chapter{Cronograma e Resultados Esperados}\label{chap:Cronograma e Resultados Esperados}
+\chapter{Plano de Trabalho e Cronograma}\label{chap:plano_trabalho}
 
-\section{Cronograma}\label{sec:Cronograma}
+O trabalho teve início em abril de 2026. Até setembro do mesmo ano foram concluídas a revisão bibliográfica, a definição e a coleta do corpus e a construção dos dois fluxos do agente de conformidade de gênero, além da redação desta qualificação. A Tabela~\ref{tab:cronograma-2026} registra essas atividades e as previstas para o restante de 2026, e a Tabela~\ref{tab:cronograma-2027} apresenta as de 2027, até a defesa.
 
-O cronograma das etapas restantes até a defesa é apresentado na Tabela \ref{tab:cronograma}, em bimestres a partir da qualificação.
+% As atividades restantes decorrem das dependências fixadas no plano de avaliação: os dois fluxos do agente de fronteira de rejeição precisam existir antes que seus níveis de avaliação possam ser executados, e as anotações de referência precisam estar prontas antes dos Níveis 1, que condicionam a leitura dos demais. Toda execução de avaliação encerra-se em dezembro de 2026, de modo que janeiro de 2027 fique destinado à redação final e à revisão, com a entrega da dissertação ao final desse mês.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Cronograma das etapas restantes (por bimestre).}
-\label{tab:cronograma}
+\caption{Cronograma mensal de atividades entre abril e dezembro de 2026.}
+\label{tab:cronograma-2026}
 \small
-\begin{tabular}{p{7.5cm}cccccc}
-\toprule
-Etapa & B1 & B2 & B3 & B4 & B5 & B6 \\
-\midrule
-Consolidação da fundamentação e da teoria de design & X & X & & & & \\
-Construção da Fase A (conversão, extração, agregação) & X & X & X & & & \\
-Construção das bases de conhecimento e do RAG & & X & X & & & \\
-Construção da Fase B (verificação, agentes, tutor) & & & X & X & & \\
-Estudo de caso e coleta de dados & & & & X & X & \\
-Análise dos resultados e redação final & & & & & X & X \\
-Preparação da defesa & & & & & & X \\
-\bottomrule
+\begin{tabular}{|p{6.2cm}|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Atividades} & \multicolumn{9}{c|}{\textbf{2026}} \\
+\cline{2-10}
+ & \textbf{Abr} & \textbf{Mai} & \textbf{Jun} & \textbf{Jul} & \textbf{Ago} & \textbf{Set} & \textbf{Out} & \textbf{Nov} & \textbf{Dez} \\
+\hline
+Planejamento inicial & $\bullet$ & $\bullet$ & & & & & & & \\
+\hline
+Revisão bibliográfica & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & & & & & \\
+\hline
+Definição e coleta do corpus & & & $\bullet$ & $\bullet$ & & & & & \\
+\hline
+Construção do Fluxo A do agente de conformidade & & & & $\bullet$ & $\bullet$ & & & & \\
+\hline
+Construção do Fluxo B do agente de conformidade & & & & & $\bullet$ & $\bullet$ & & & \\
+\hline
+Redação parcial (qualificação) & & & & & $\bullet$ & $\bullet$ & & & \\
+\hline
+Partição do ReviewArena e construção do Fluxo A do agente de fronteira & & & & & & $\bullet$ & $\bullet$ & $\bullet$ & \\
+\hline
+Anotações de referência e execução dos Níveis 1 & & & & & & & $\bullet$ & $\bullet$ & \\
+\hline
+Execução do Nível 2 do agente de conformidade & & & & & & & $\bullet$ & & \\
+\hline
+Construção do Fluxo B do agente de fronteira & & & & & & & & $\bullet$ & $\bullet$ \\
+\hline
+Integração das saídas dos dois agentes & & & & & & & & $\bullet$  & $\bullet$ \\
+\hline
+Execução dos Níveis 2 e 3 do agente de fronteira & & & & & & & & $\bullet$ & $\bullet$ \\
+\hline
+Análise dos resultados & & & & & & & & & $\bullet$ \\
+\hline
 \end{tabular}
 \end{table}
 
-\section{Resultados esperados}\label{sec:Resultados esperados}
+\begin{table}[H]
+\centering
+\caption{Cronograma mensal de atividades entre janeiro e fevereiro de 2027.}
+\label{tab:cronograma-2027}
+\small
+\begin{tabular}{|p{9.0cm}|c|c|}
+\hline
+\textbf{Atividades} & \multicolumn{2}{c|}{\textbf{2027}} \\
+\cline{2-3}
+ & \textbf{Jan} & \textbf{Fev} \\
+\hline
+Redação final & $\bullet$ & \\
+\hline
+Revisão & $\bullet$ & \\
+\hline
+Entrega da dissertação & $\bullet$ & \\
+\hline
+Preparação da defesa & & $\bullet$ \\
+\hline
+Defesa & & $\bullet$ \\
+\hline
+\end{tabular}
+\end{table}
 
-Espera-se que o artefato produza análises consideradas úteis pelos usuários, capazes de identificar inadequações de gênero, lacunas metodológicas e oportunidades de melhoria, e que se observe convergência parcial entre avaliações humanas e automatizadas. Espera-se, ainda, demonstrar que a orientação referenciada ao gênero-alvo aumenta a conformidade dos manuscritos e é percebida como mais acionável do que o retorno genérico. Como contribuição de maior alcance, espera-se consolidar uma teoria de design para artefatos de apoio à enculturação em gêneros acadêmicos, oferecendo subsídios para futuras pesquisas e para a evolução do trabalho rumo ao doutorado.
+% As atividades sobrepõem-se onde as dependências permitem. As anotações de referência dos dois agentes não dependem do grafo estar pronto, apenas da partição de construção, e por isso correm em paralelo com a montagem do grafo. O Nível 2 do agente de conformidade depende somente dos fluxos já concluídos e do Nível 1, e por isso ocorre antes que o agente de fronteira esteja completo. Os Níveis 2 e 3 do agente de fronteira, que dependem do seu Fluxo B e da integração, concentram-se em dezembro.
+
+% As anotações de referência são o principal ponto de pressão do cronograma, por serem manuais e condicionarem os Níveis 1 dos dois agentes. Ambas operam sobre amostras reduzidas, conforme previsto no plano de avaliação. Caso alguma delas se estenda além do previsto, a margem disponível está na redação final, que ocupa dezembro e janeiro, e não na execução da avaliação, encerrada em dezembro.
+
+

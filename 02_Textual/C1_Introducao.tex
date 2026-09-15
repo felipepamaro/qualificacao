@@ -11,9 +11,9 @@ Essas tecnologias vêm sendo exploradas em diferentes etapas do ciclo científic
 
 Este trabalho parte de um desenho de pesquisa apresentado no Simpósio Brasileiro de Sistemas de Informação (SBSI\nomenclature{SBSI}{Simpósio Brasileiro de Sistemas de Informação}) \cite{Amaro}, que propôs uma arquitetura multiagente para apoio à avaliação científica em conferências brasileiras. A partir das contribuições recebidas naquele fórum, o escopo é aprofundado em duas direções complementares. A primeira é a mudança do alvo de avaliação: em vez de confrontar o manuscrito com critérios universais de qualidade, o artefato passa a analisá-lo em relação a uma trilha ou conferência determinada, tomada como referência de adequação. A segunda é a articulação entre a conformidade a esse alvo e os motivos recorrentes de rejeição observados em avaliações reais, de modo a cobrir aspectos que a conformidade de gênero, isoladamente, não alcança.
 
-Embora pesquisas recentes \cite{DeepReview,MARG,AgentReview,AgentLaboratory} explorem o uso de modelos de linguagem na geração de \textit{feedback} acadêmico e na análise automatizada de artigos, a maioria dessas iniciativas concentra-se em conferências internacionais de áreas específicas do conhecimento e apoia-se em bases de revisões que não contemplam o contexto brasileiro. Cada comunidade científica, no entanto, consolida convenções próprias de escrita e de avaliação, que funcionam como um gênero reconhecível e nem sempre explícito aos autores iniciantes \cite{GenresOrgComm}. Ainda há pouca investigação sobre como artefatos de IA podem ser projetados e avaliados para apoiar o processo editorial de conferências brasileiras.
+Embora outras pesquisas \cite{DeepReview,MARG,AgentReview,AgentLaboratory} explorem o uso de modelos de linguagem na geração de \textit{feedback} acadêmico e na análise automatizada de artigos, a maioria dessas iniciativas concentra-se em conferências internacionais de áreas específicas do conhecimento e apoia-se em bases de revisões que não contemplam o contexto brasileiro. Cada comunidade científica, no entanto, consolida convenções próprias de escrita e de avaliação, que funcionam como um gênero reconhecível e nem sempre explícito aos autores iniciantes \cite{GenresOrgComm}. Ainda há pouca investigação sobre como artefatos de IA podem ser projetados e avaliados para apoiar o processo editorial de conferências brasileiras.
 
-Nesse contexto, surge a oportunidade de investigar a capacidade de agentes de IA como instrumentos de apoio à iniciação científica, não para substituir revisores humanos, mas para auxiliar pesquisadores iniciantes, ampliando a qualidade, a consistência e a escalabilidade da produção de artigos em conferências brasileiras. Esta pesquisa busca contribuir para esse debate ao propor e investigar um artefato voltado à análise de artigos científicos, com foco no contexto brasileiro e na qualificação da produção científica nacional.
+Nesse contexto, surge a oportunidade de investigar instrumentos de apoio à iniciação científica, não para substituir revisores humanos, mas para auxiliar pesquisadores iniciantes, ampliando a qualidade, a consistência e a escalabilidade da produção de artigos em conferências brasileiras. Esta pesquisa busca contribuir para esse debate ao propor e investigar um artefato voltado à análise de artigos científicos, com foco no contexto brasileiro e na qualificação da produção científica nacional.
 
 % \section{Contexto}
 
@@ -46,7 +46,8 @@ Ou seja, mesmo um trabalho metodologicamente sólido pode ser rejeitado na triag
 
 O \textit{desk rejection} de artigos submetidos pode ser um processo extremamente frustrante e desmotivador para o pesquisador, mas, igualmente, uma etapa vital e demorada para o editor, responsável por selecionar os artigos adequados que atendam aos critérios necessários para revisão e análise mais aprofundadas \cite{Dwivedi2022}.
 
-O conhecimento que constitui um artigo bem-formado para determinada comunidade é tácito: alguns detalhes ficam implícitos ou subentendidos, encontra-se distribuído nos artigos já aceitos e é adquirido lentamente, dado que as conferências não costumam divulgar as revisões em domínio público. Esse repertório compartilhado por uma comunidade e aprendido por imersão é o que a Teoria de Gêneros \cite{GenresOrgComm} descreve como gênero, arcabouço desenvolvido no Capítulo~\ref{chap:fundamentacao}. % TODO conferir se o label do capitulo de fundamentacao e' chap:fundamentacao Todo este conhecimento é adquirido por imersão, ao longo da formação do pesquisador, de forma prática e progressiva. 
+O conhecimento que constitui um artigo bem-formado para determinada comunidade é tácito: alguns detalhes ficam implícitos ou subentendidos, encontra-se distribuído nos artigos já aceitos e é adquirido lentamente, dado que as conferências não costumam divulgar as revisões em domínio público. Esse repertório compartilhado por uma comunidade e aprendido por imersão é o que a Teoria de Gêneros \cite{GenresOrgComm} descreve como gênero.
+
 É justamente o pesquisador em início de carreira quem menos domina este conhecimento, e quem mais sofre suas consequências. A hipótese de trabalho que orienta esta proposta é a de que esse conhecimento tácito pode ser tornado explícito e computável a partir do corpus de artigos aceitos de uma conferência, e que um artefato pode usá-lo para orientar o autor antes da submissão.
 
 \section{Problema e questão de pesquisa}
@@ -58,15 +59,22 @@ Identifica-se, assim, uma lacuna relacionada à compreensão de como agentes de 
 
 A questão de pesquisa que orienta o estudo é:
 
+% \begin{quotation}
+% \noindent Modelos de IA podem contribuir para a redução da rejeição editorial a partir do corpus de artigos aceitos, e utilizá-las para produzir orientação acionável que apoie autores em início de carreira e reduza a incidência de rejeição editorial precoce?
+% \noindent Um artefato baseado em agentes de IA pode modelar as convenções de gênero de uma trilha de conferência, a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
+% \end{quotation}
+
+% Em que medida agentes de IA podem modelar regras de gênero a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
+
 \begin{quotation}
-\noindent Modelos de IA podem contribuir para a redução da rejeição editorial a partir do corpus de artigos aceitos, e utilizá-las para produzir orientação acionável que apoie autores em início de carreira e reduza a incidência de rejeição editorial precoce?
-\noindent Um artefato baseado em agentes de IA pode modelar as convenções de gênero de uma trilha de conferência, a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
+\noindent Em que medida é modelar regras de gênero a partir de um corpus de artigos aceitos em trilha de uma conferência e produzir orientação acionável que apoie autores a produzir manuscritos alinhados às expectativas da comunidade?
+% \noindent Um artefato baseado em agentes de IA pode modelar as convenções de gênero de uma trilha de conferência, a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
 \end{quotation}
 
 \section{Objetivos}
 
-O objetivo geral é projetar, construir e avaliar um artefato de software, um tutor baseado em modelos de IA que modele o gênero de uma trilha de conferência e verifique a conformidade de manuscritos a esse gênero, gerando orientação formativa. Como objetivos específicos, definem-se: 
-O objetivo geral é projetar, construir e avaliar um artefato de software baseado em agentes de IA que modele o gênero de uma trilha de conferência, verifique a conformidade de manuscritos a esse gênero e o articule aos motivos recorrentes de rejeição observados em avaliações reais, de modo a gerar orientação formativa a pesquisadores iniciantes. Como objetivos específicos, definem-se:
+% O objetivo geral é projetar, construir e avaliar um artefato de software, baseado em modelos de IA que modele o gênero de uma trilha de conferência e verifique a conformidade de manuscritos a esse gênero, gerando orientação formativa. Como objetivos específicos, definem-se: 
+O objetivo geral é projetar, construir e avaliar um artefato de software que modele o gênero de uma trilha de conferência, verifique a conformidade de manuscritos a esse gênero e o articule aos motivos recorrentes de rejeição observados em avaliações reais, de modo a gerar orientação formativa a pesquisadores iniciantes. Como objetivos específicos, definem-se:
 
 \begin{itemize}
     \item[(i)] formular uma fundamentação teórica que articule a Teoria de Gêneros \cite{GenresOrgComm} e a análise de \textit{moves} retóricos \cite{GenreAnalysis} no âmbito do método \textit{Design Science Research} (DSR\nomenclature{DSR}{Design Science Research}) \cite{Hevner2004};

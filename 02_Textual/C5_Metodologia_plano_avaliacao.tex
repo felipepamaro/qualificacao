@@ -1,28 +1,22 @@
-
-
-
 \chapter{Metodologia e Plano de Avaliação}\label{chap:metodologia_plano_avaliacao}
 
-% Em Design Science Research, a avaliação não é etapa de verificação posterior à construção: é o que sustenta a alegação de utilidade e o que distingue a pesquisa de um relato de desenvolvimento \cite{Hevner2004}. Cabe, portanto, declarar com precisão o que este trabalho avalia e o que deixa de avaliar.
 
-% Avalia-se a \textbf{validade interna} e a \textbf{adequação funcional} do artefato: se cada camada faz o que se propõe a fazer e se aquilo que o artefato entrega ao autor decorre do conhecimento de gênero derivado do corpus, e não do modelo de linguagem que redige o retorno. Não se avalia a utilidade percebida por autores em formação, construto perceptual que exige participantes e coleta qualitativa. Tampouco se avalia o efeito do artefato sobre taxas reais de rejeição editorial, o que exigiria acesso a manuscritos rejeitados e ao processo decisório dos comitês, ambos fora do alcance deste trabalho.
+% Em Design Science Research, a avaliação é o que sustenta a alegação de utilidade de um artefato e o que distingue a pesquisa de um relato de desenvolvimento \cite{Hevner2004}. O que se avalia em cada agente, como cada medida é obtida e qual critério decide se o resultado sustenta a proposta são fixados antes da execução, para que nenhum resultado seja interpretado depois de conhecido.
 
-% Os procedimentos descritos a seguir são quantitativos e operam sobre evidência interna ao corpus, sendo executáveis pelo próprio pesquisador sem recrutamento de participantes.
+% Avalia-se a \textbf{validade interna} de cada agente, isto é, se cada componente faz o que se propõe, e a \textbf{complementaridade} entre eles, isto é, se a análise de conformidade de gênero contribui para a sinalização de risco. Todos os procedimentos são quantitativos, operam sobre evidência interna aos corpora e são executáveis pelo próprio pesquisador, sem recrutamento de participantes. A utilidade percebida por autores em formação, construto perceptual que exige participantes e coleta qualitativa, fica postergada pelas razões expostas na Seção~\ref{sec:utilidade-futura}.
 
 
-\section{Estratégia}
-\label{sec:estrategia-avaliacao}
- 
-A avaliação organiza-se em níveis que são correspondentes às camadas do artefato. A especificação de gênero depende da qualidade da extração, o retorno ao autor depende da adequação da especificação, de modo que cada nível só é interpretável se o anterior se sustentar. Os três empregam evidência interna ao corpus e são executáveis pelo próprio pesquisador.
- 
-% Este trabalho avalia a \textbf{validade interna e a adequação funcional} do artefato, e não sua utilidade em uso, cuja avaliação é remetida à etapa subsequente do trabalho pelas razões expostas na Seção~\ref{sec:utilidade-futura}.
- 
+\section{Avaliação do agente de conformidade de gênero}
+\label{sec:avaliacao-conformidade}
+
+O agente de conformidade é avaliado em dois níveis, correspondentes às suas camadas. A Especificação de Gênero depende da qualidade da extração de \textbf{moves}, de modo que o segundo nível só é interpretável se o primeiro se sustentar. A Tabela~\ref{tab:niveis-conformidade} resume os dois.
+
 \begin{table}[H]
 \centering
-\caption{Níveis de avaliação, construtos e procedimentos}
-\label{tab:niveis-avaliacao}
+\caption{Níveis de avaliação do agente de conformidade de gênero}
+\label{tab:niveis-conformidade}
 \small
-\begin{tabular}{|p{1.0cm}|p{3.3cm}|p{5.3cm}|p{3.7cm}|}
+\begin{tabular}{|p{1.0cm}|p{3.4cm}|p{5.4cm}|p{3.5cm}|}
 \hline
 \textbf{Nível} & \textbf{Construto} & \textbf{Procedimento} & \textbf{Evidência} \\
 \hline
@@ -30,109 +24,150 @@ A avaliação organiza-se em níveis que são correspondentes às camadas do art
 \hline
 2 & Validade da Especificação de Gênero (A3--A4) & Validação por retenção, contraste entre trilhas e sensibilidade aos limiares & Trilha-alvo e trilhas de contraste \\
 \hline
-3 & Contribuição da especificação ao retorno (B4) & Ablação com e sem a especificação, sobre propriedades verificáveis da saída & Artigos retidos \\
-\hline
 \end{tabular}
 \end{table}
 
-
-\section{Nível 1: validade da extração de \textbf{moves}}
+\subsection{Nível 1: validade da extração de \textbf{moves}}
 \label{sec:nivel1}
 
-Toda a cadeia repousa sobre a acurácia da rotulação. Se a extração falha de modo sistemático em um \textbf{move}, as distribuições agregadas em A3 e as regras derivadas em A4 carecem de sentido ainda que sejam computadas corretamente, e o erro se propaga sem deixar rastro nas camadas superiores.
+% Toda a cadeia do agente repousa sobre a acurácia da rotulação. Se a extração falha de modo sistemático em um \textbf{move}, as distribuições agregadas em A3 e as regras derivadas em A4 carecem de sentido ainda que sejam computadas corretamente, e o erro se propaga sem deixar rastro nas camadas superiores.
 
 O procedimento consiste na anotação manual de uma amostra de artigos da trilha-alvo segundo o esquema de \textbf{moves} e \textit{steps} adotado, seguida da comparação com os rótulos produzidos pelo modelo. Reportam-se precisão, revocação e medida F1 por \textbf{move}, a medida F1 macro como métrica agregada e a matriz de confusão entre categorias. A matriz importa tanto quanto os índices: confundir \textit{apontar a lacuna} com \textit{ocupar o nicho} tem consequência distinta de deixar de identificar ambos, e apenas a primeira situação preserva a frequência agregada do par.
 
 A execução ocorre em duas etapas. Uma amostra inicial de dez artigos verifica a viabilidade do procedimento e estabiliza o protocolo de anotação, que é fixado antes de qualquer inspeção das saídas do modelo. A avaliação definitiva opera sobre amostra ampliada, estratificada de modo a não concentrar artigos de um mesmo perfil estrutural.
 
-A anotação de referência é produzida por um único anotador, o próprio pesquisador, de modo que não se dispõe de medida de concordância entre anotadores humanos que sirva de teto interpretativo aos resultados. A alegação sustentável não é que o extrator seja acurado em termos absolutos, mas que concorda com uma anotação de referência em determinada proporção dos casos, com erros concentrados em categorias identificáveis. O produto principal do nível é a caracterização desse padrão de erro e a estimativa de seu efeito sobre as frequências agregadas.
+A anotação de referência é produzida por um único anotador, o próprio pesquisador, de modo que não se dispõe de medida de concordância entre anotadores humanos que sirva de teto interpretativo. A alegação sustentável não é que o extrator seja acurado em termos absolutos, mas que concorda com uma anotação de referência em determinada proporção dos casos, com erros concentrados em categorias identificáveis. O produto principal do nível é a caracterização desse padrão de erro e a estimativa de seu efeito sobre as frequências agregadas.
 
-
-\section{Nível 2: validade da Especificação de Gênero}
+\subsection{Nível 2: validade da Especificação de Gênero}
 \label{sec:nivel2}
 
 O segundo nível verifica se a especificação derivada descreve o gênero da trilha ou apenas regularidades acidentais do conjunto processado. Três procedimentos concorrem para a resposta.
 
-\subsection*{Validação por retenção}
+\textbf{Validação por retenção.} Parte dos artigos aceitos na trilha-alvo é separada antes da execução do Fluxo A e submetida à verificação do Fluxo B. Se a especificação captura o gênero reconhecido pela comunidade, textos que essa mesma comunidade aceitou devem satisfazer a maior parte das regras de estatuto obrigatório. Uma taxa elevada de reprovação indicaria limiares mal calibrados ou regras sem valor distintivo. A distribuição das ausências observadas entre artigos aceitos informa, ainda, quantas regras um texto reconhecido pela comunidade pode deixar de invocar sem perder pertencimento, o que calibra o critério de suficiência do agente.
 
-Parte dos artigos aceitos na trilha-alvo é separada antes da execução do Fluxo A e submetida à verificação do Fluxo B. Se a especificação captura o gênero reconhecido pela comunidade, textos que essa mesma comunidade aceitou devem satisfazer a maior parte das regras de estatuto obrigatório. Uma taxa elevada de reprovação indicaria limiares mal calibrados ou regras sem valor distintivo. A distribuição das ausências observadas entre artigos aceitos informa, ainda, a calibração do critério de suficiência enunciado em PP4: é ela que revela quantas regras um texto reconhecido pela comunidade pode deixar de invocar sem perder pertencimento.
+Reter artigos reduz o corpus de derivação. Com 67 artigos na trilha-alvo, uma partição de vinte por cento deixa pouco mais de cinquenta para derivar a especificação, e elementos cuja ocorrência esteja próxima de um dos cortes podem mudar de estatuto apenas em função da partição. Compara-se, por isso, a classificação obtida sobre o corpus completo com a obtida sobre o corpus reduzido, e reporta-se toda regra que migre de faixa.
 
-O procedimento tem um efeito colateral que precisa ser reportado. Reter artigos reduz o corpus de derivação, e com 67 artigos na trilha-alvo uma partição de vinte por cento deixa pouco mais de cinquenta para derivar a especificação. Elementos cuja ocorrência esteja próxima de um dos cortes podem mudar de estatuto apenas em função da partição, caso em que a retenção estaria validando uma especificação distinta daquela que o artefato de fato emprega. Compara-se, por isso, a classificação obtida sobre o corpus completo com a obtida sobre o corpus reduzido, e reporta-se toda regra que migre de faixa.
+\textbf{Contraste entre trilhas.} A especificação da trilha-alvo é aplicada aos artigos das trilhas de contraste, em dois graus de proximidade. O primeiro confronta a Trilha de Pesquisa em SI com a \textit{Main track} do ENIAC, que pertencem a comunidades e áreas distintas: uma taxa de conformidade substancialmente inferior à dos artigos retidos indica que as regras capturam algo próprio da trilha-alvo, e não propriedades genéricas de artigos publicados em eventos da SBC. O segundo grau é o mais exigente e deriva especificações separadas para a \textit{Main track} e a \textit{Undergraduate track} do ENIAC, comparando-as entre si. As duas compartilham evento, chamada, período, corpo de revisores e área de conhecimento, variando apenas o subgênero. Se as especificações resultantes forem indistinguíveis, a trilha não é o nível de resolução adequado. Reporta-se o conjunto de elementos cujo estatuto difere entre as duas e a magnitude dessa diferença.
 
-\subsection*{Contraste entre trilhas}
-
-A especificação da trilha-alvo é aplicada aos artigos das trilhas de contraste. O contraste opera em dois graus de proximidade, e é essa gradação que o torna informativo.
-
-O primeiro grau confronta a Trilha de \textit{Pesquisa em SI} com a \textit{Main track} do ENIAC. As duas pertencem a comunidades e áreas distintas, compartilhando apenas o formato editorial da SBC, de modo que uma taxa de conformidade substancialmente inferior à dos artigos retidos indica que as regras capturam algo próprio da trilha-alvo, e não propriedades genéricas de artigos publicados em eventos da sociedade.
-
-O segundo grau é o mais exigente e deriva especificações separadas para a \textit{Main track} e a \textit{Undergraduate track} do ENIAC, comparando-as entre si. As duas trilhas compartilham evento, chamada, período, corpo de revisores e área de conhecimento, variando apenas o subgênero. Se as especificações resultantes forem indistinguíveis, a trilha não é o nível de resolução adequado e a decisão perde sustentação. Reporta-se o conjunto de elementos cujo estatuto difere entre as duas e a magnitude dessa diferença.
-
-\subsection*{Sensibilidade aos limiares}
-
-O procedimento percorre a faixa plausível de valores dos dois cortes que convertem frequência em estatuto e reporta quantas e quais regras mudam de classificação, bem como o efeito de cada configuração sobre a validação por retenção. O resultado esperado não é um valor ótimo, mas a identificação de faixas de estabilidade e de pontos de ruptura. Regras que preservam seu estatuto ao longo de toda a faixa constituem o núcleo estável da especificação; regras que oscilam devem ser tratadas com reserva no retorno ao autor, e a análise indica quais são.
+\textbf{Sensibilidade aos limiares.} O procedimento percorre a faixa plausível de valores dos dois cortes que convertem frequência em estatuto e reporta quantas e quais regras mudam de classificação, bem como o efeito de cada configuração sobre a validação por retenção. O resultado esperado não é um valor ótimo, mas a identificação de faixas de estabilidade e de pontos de ruptura. Regras que preservam seu estatuto ao longo de toda a faixa constituem o núcleo estável da especificação; regras que oscilam devem ser tratadas com reserva no retorno ao autor.
 
 
-\section{Nível 3: contribuição da especificação ao retorno}
-\label{sec:nivel3}
+\section{Avaliação do agente de fronteira de rejeição}
+\label{sec:avaliacao-fronteira}
 
-O terceiro nível responde a uma objeção previsível: em que medida o retorno do artefato difere daquele que se obteria pedindo a um modelo de linguagem que comentasse o manuscrito.
+O agente de fronteira dispõe de uma condição que o agente de conformidade não tem: um gabarito real. O ReviewArena registra, para cada artigo, a decisão editorial de aceite ou rejeição, o que permite medir se o retorno de risco discrimina artigos que foram de fato recusados de artigos que foram aceitos. Essa medida responde diretamente se o agente sinaliza algo que importa para o desfecho editorial, e é o eixo desta avaliação. A Tabela~\ref{tab:niveis-fronteira} resume os três níveis.
 
-Realiza-se uma ablação sobre os artigos retidos, gerando o retorno em duas condições, com e sem a Especificação de Gênero disponível ao componente de composição, mantidos o mesmo modelo, a mesma instrução geral e o mesmo manuscrito. A comparação recai sobre propriedades verificáveis por contagem, e não sobre juízo de qualidade: a proporção de observações que declaram o suporte quantitativo da regra invocada; a proporção que referencia conteúdo específico do manuscrito, por oposição às que se aplicariam sem alteração a qualquer outro texto; e a incidência de redação substituta, que responde à preocupação levantada por \citeonline{WhyandWhen} quanto à incorporação acrítica de texto produzido por modelos de linguagem.
+\begin{table}[H]
+\centering
+\caption{Níveis de avaliação do agente de fronteira de rejeição}
+\label{tab:niveis-fronteira}
+\small
+\begin{tabular}{|p{1.0cm}|p{3.4cm}|p{5.4cm}|p{3.5cm}|}
+\hline
+\textbf{Nível} & \textbf{Construto} & \textbf{Procedimento} & \textbf{Evidência} \\
+\hline
+1 & Validade da extração dos motivos de recusa (Fluxo A) & Comparação com anotação de referência e caracterização dos erros por categoria de motivo & Amostra anotada de avaliações do ReviewArena \\
+\hline
+2 & Poder discriminante do retorno de risco (Fluxo B) & Classificação aceito/rejeitado sobre partição retida, com métricas de classificação & Partição de teste do ReviewArena \\
+\hline
+3 & Contribuição da análise de conformidade & Ablação do Fluxo B com e sem a análise de conformidade como insumo & Mesma partição de teste \\
+\hline
+\end{tabular}
+\end{table}
 
-A escolha de propriedades contáveis é deliberada. Comparar as duas condições quanto à qualidade percebida exigiria avaliadores e reintroduziria, no nível destinado a isolar a contribuição da especificação, a variável que os três níveis procuram manter fora. O que se pretende estabelecer aqui não é que o retorno seja bom, mas que ele deva algo à especificação.
+\subsection{Partição do ReviewArena}
+\label{sec:particao}
+
+Antes de qualquer execução, o ReviewArena é dividido em duas partições disjuntas. A \textbf{partição de construção} alimenta o Fluxo A e constitui o grafo de conhecimento. A \textbf{partição de teste} é retida e nunca entra no grafo; seus artigos são os manuscritos submetidos ao Fluxo B na avaliação. A separação impede que um artigo de teste seja recuperado como vizinho de si mesmo, o que inflaria artificialmente o resultado, e é a mesma lógica da validação por retenção aplicada ao agente de conformidade.
+
+A partição de teste é estratificada pela decisão editorial, de modo a conter proporções conhecidas de artigos aceitos e rejeitados, e pelo veículo, para que a avaliação não se concentre em uma única conferência da base. A proporção entre as partições é fixada antes da execução e reportada junto aos resultados.
+
+\subsection{Nível 1: validade da extração dos motivos de recusa}
+\label{sec:nivel1-fronteira}
+
+O grafo de conhecimento é tão bom quanto os motivos de recusa que o Fluxo A extrai das avaliações. Se a extração confunde categorias de motivo ou deixa de identificar motivos presentes, os vizinhos recuperados carregarão rótulos errados, e o retorno ao autor reportará riscos que os revisores não apontaram.
+
+O procedimento espelha o Nível 1 do agente de conformidade. Uma amostra de avaliações da partição de construção é anotada manualmente segundo um esquema de categorias de motivo de recusa, fixado antes da inspeção das saídas do modelo. Os motivos extraídos pelo modelo são comparados à anotação, reportando-se precisão, revocação e medida F1 por categoria, a medida F1 macro como agregado e a matriz de confusão. Como no outro agente, a anotação é produzida por um único anotador, e a alegação sustentável é de concordância com uma referência, não de acurácia absoluta.
+
+\subsection{Nível 2: poder discriminante do retorno de risco}
+\label{sec:nivel2-fronteira}
+
+Cada artigo da partição de teste é submetido ao Fluxo B como se fosse um manuscrito. O agente produz o retorno de risco, e desse retorno deriva-se uma predição binária, sinalizado como exposto a risco de recusa ou não, por regra fixada antes da execução e aplicada de modo uniforme a todos os artigos. A predição é comparada à decisão editorial real registrada na base.
+
+Trata-se de um problema de classificação binária, e reportam-se as métricas usuais: precisão, revocação e medida F1 para a classe de rejeitados, a acurácia global e a matriz de confusão. A medida F1 da classe de rejeitados é a métrica principal, porque é a que expressa se o agente sinaliza os artigos que de fato foram recusados sem sinalizar indistintamente todos os artigos. Como as classes podem ser desbalanceadas, reporta-se também a área sob a curva ROC (Receiver Operating Characteristic), obtida a partir do grau de risco que o agente atribui, e o desempenho de uma linha de base trivial que sinalize todos os artigos como expostos, para que o ganho do agente seja lido contra ela.
+
+O nível responde à pergunta central da avaliação: se o retorno de risco distingue artigos aceitos de rejeitados acima do acaso e acima da linha de base trivial, o agente sinaliza algo que corresponde ao desfecho editorial real.
+
+% \subsection{Nível 3: contribuição da análise de conformidade}
+% \label{sec:nivel3-fronteira}
+
+% A proposta afirma que os dois agentes se complementam, e que a análise de conformidade de gênero entra no Fluxo B do agente de fronteira como sinal de aproximação. Esse nível verifica se essa entrada contribui de fato, por meio de uma ablação controlada.
+
+% O Nível 2 é executado duas vezes sobre a mesma partição de teste, com o mesmo grafo, o mesmo modelo e a mesma regra de predição, variando apenas o insumo: em uma condição o Fluxo B recebe o manuscrito e a análise de conformidade; na outra, recebe apenas o manuscrito. Comparam-se as métricas de classificação das duas condições. Se a condição com a análise de conformidade apresentar medida F1 superior para a classe de rejeitados, a complementaridade está demonstrada; se as duas condições forem indistinguíveis, a análise de conformidade não contribui para a sinalização de risco, e a alegação de complementaridade não se sustenta.
+
+% A ablação é controlada porque as duas condições diferem em um único fator e são medidas contra o mesmo gabarito, o que permite atribuir a diferença observada à presença da análise de conformidade.
 
 
 \section{Critérios de sucesso}
 \label{sec:criterios}
 
-Cada nível produz números, e números só decidem alguma coisa se o critério estiver fixado antes da execução. A Tabela~\ref{tab:criterios} registra os critérios adotados. Eles são decisões de projeto, e não constantes derivadas da literatura; sua função é impedir que o resultado seja interpretado depois de conhecido.
+%Cada nível produz números, e números só decidem alguma coisa se o critério estiver fixado antes da execução. 
+A Tabela~\ref{tab:criterios} registra os critérios adotados. Eles são decisões de projeto, e não constantes derivadas da literatura; sua função é impedir que o resultado seja interpretado depois de conhecido. Os patamares numéricos são fixados nos protocolos de anotação e de partição, antes da execução, e reportados junto aos resultados.
 
 \begin{table}[H]
 \centering
-\caption{Critérios de sucesso por nível}
+\caption{Critérios de sucesso por agente e nível}
 \label{tab:criterios}
 \small
-\begin{tabular}{|p{1.0cm}|p{5.6cm}|p{6.8cm}|}
+\begin{tabular}{|p{2.2cm}|p{5.0cm}|p{6.2cm}|}
 \hline
-\textbf{Nível} & \textbf{Critério} & \textbf{Interpretação de um resultado adverso} \\
+\textbf{Agente, nível} & \textbf{Critério} & \textbf{Interpretação de um resultado adverso} \\
 \hline
-1 & Medida F1 macro acima do patamar fixado, sem \textbf{move} obrigatório abaixo de um piso individual & Extração inadequada para sustentar as camadas superiores; exige revisão do esquema de rotulação ou do modelo antes de prosseguir \\
+Conformidade, 1 & Medida F1 macro acima do patamar fixado, sem \textbf{move} obrigatório abaixo de um piso individual & Extração inadequada para sustentar a especificação; exige revisão do esquema de rotulação ou do modelo antes de prosseguir \\
 \hline
-2 & Maioria dos artigos retidos satisfaz as regras obrigatórias; conformidade das trilhas de contraste inferior à dos retidos; núcleo de regras estável na faixa de limiares & Especificação sem poder discriminante, descrevendo artigos científicos em geral e não o gênero da trilha \\
+Conformidade, 2 & Maioria dos artigos retidos satisfaz as regras obrigatórias; conformidade das trilhas de contraste inferior à dos retidos; núcleo de regras estável na faixa de limiares & Especificação sem poder discriminante, descrevendo artigos científicos em geral e não o gênero da trilha \\
 \hline
-3 & Condição com especificação supera a condição sem especificação nas três propriedades contadas & O retorno não deve à modelagem de gênero aquilo que entrega, e a contribuição do artefato não se distingue do uso direto de um modelo de linguagem \\
+Fronteira, 1 & Medida F1 macro acima do patamar fixado para as categorias de motivo & Extração inadequada; os motivos do grafo não refletem o que os revisores apontaram \\
 \hline
+Fronteira, 2 & Medida F1 da classe de rejeitados e área sob a curva ROC acima da linha de base trivial & O retorno de risco não distingue aceitos de rejeitados; o agente não sinaliza o que importa para o desfecho editorial \\
+\hline
+% Fronteira, 3 & Condição com análise de conformidade supera a condição sem análise na medida F1 da classe de rejeitados & A análise de conformidade não contribui para a sinalização de risco; a alegação de complementaridade não se sustenta \\
+% \hline
 \end{tabular}
 \end{table}
 
-Os patamares numéricos do Nível~1 são fixados no protocolo de anotação, antes da execução. Registra-se que um resultado adverso em qualquer nível é achado da pesquisa, e não falha a ser contornada: estabelecer que a modelagem de gênero por derivação empírica não sustenta um tutor de conformidade seria contribuição legítima ao conhecimento, ainda que negativa.
+% Um resultado adverso em qualquer nível é achado da pesquisa, e não falha a ser contornada. Estabelecer que a modelagem de gênero por derivação empírica não sustenta a verificação de conformidade, ou que avaliações negativas de outras comunidades não permitem sinalizar risco para uma trilha brasileira, seria contribuição legítima ao conhecimento, ainda que negativa.
 
 
 \section{Avaliação de utilidade percebida}
 \label{sec:utilidade-futura}
 
-A utilidade percebida do Modo Tutor por autores em início de formação é construto perceptual e não admite substituto computacional: requer participantes, seus próprios manuscritos e coleta de dados qualitativos. Está prevista para a etapa subsequente do trabalho, como estudo exploratório com um pequeno número de mestrandos do programa, mediante termo de consentimento livre e esclarecido e observância dos procedimentos institucionais aplicáveis.
+A utilidade percebida do artefato por autores em início de formação é construto perceptual e não admite substituto computacional: requer participantes, seus próprios manuscritos e coleta de dados qualitativos. Está prevista para a etapa subsequente do trabalho, como estudo exploratório com um pequeno número de mestrandos do programa, mediante termo de consentimento livre e esclarecido e observância dos procedimentos institucionais aplicáveis.
 
-A postergação é escolha de escopo. Os três níveis aqui descritos estabelecem que o artefato mede o que se propõe a medir e que aquilo que ele acrescenta ao retorno decorre do conhecimento de gênero derivado do corpus. Avaliar utilidade antes dessas condições produziria percepções sobre um sistema cujos eventuais problemas não poderiam ser atribuídos a nenhuma camada em particular: um participante insatisfeito não distinguiria uma extração ruim de uma especificação mal calibrada ou de um texto mal redigido.
-
-
-\section{Ameaças à validade}
-\label{sec:ameacas}
-
-\textbf{Anotador único.} A anotação de referência é produzida pelo pesquisador, o que implica ausência de medida de concordância e risco de viés na direção do comportamento esperado do extrator. Mitiga-se fixando o protocolo de anotação antes da inspeção dos resultados do modelo e reportando o padrão de erro em lugar de acurácia absoluta.
-
-\textbf{Ausência de validação por especialistas.} A pertinência das regras não é submetida a revisores experientes da trilha, o que impede detectar regras que a comunidade reconheça e o corpus não revele. Os procedimentos do Nível~2 atestam que as regras descrevem o corpus e discriminam entre trilhas, não que sejam exaustivas.
-
-\textbf{Viés de sobrevivência.} O corpus contém apenas artigos aceitos. A validação por retenção estabelece que a especificação é compatível com textos aprovados, não que a não conformidade implique rejeição. Nenhum resultado deste capítulo autoriza afirmação sobre a fronteira entre aceitação e recusa.
-
-\textbf{Dependência entre níveis.} Erros sistemáticos do extrator propagam-se às camadas superiores e podem produzir resultados internamente consistentes e substantivamente equivocados. A caracterização do erro obtida no Nível~1 deve, por isso, acompanhar a leitura dos demais níveis, e não ser tratada como etapa vencida.
-
-\textbf{Uma edição por trilha.} As especificações derivam de uma única edição de cada evento. Regularidades próprias daquela edição não se distinguem de regularidades estáveis da trilha, e o contraste entre trilhas atenua apenas parcialmente a limitação, uma vez que ambas as trilhas do ENIAC provêm da mesma edição.
-
-\textbf{Alcance das alegações.} Os procedimentos operam sobre uma trilha-alvo, uma língua e uma comunidade. Não se sustenta alegação de generalidade a outros gêneros acadêmicos, a outras comunidades científicas ou a outros idiomas.
+A postergação é escolha de escopo. Os níveis aqui descritos estabelecem que cada agente mede o que se propõe a medir e que a análise de conformidade contribui para a sinalização de risco. Avaliar utilidade antes dessas condições produziria percepções sobre um sistema em construção, e não sobre o artefato final. 
 
 
-\section{Síntese}
-\label{sec:sintese-avaliacao}
+% \section{Ameaças à validade}
+% \label{sec:ameacas}
 
-Os três níveis respondem, em ordem, a três perguntas encadeadas: se o artefato enxerga no texto o que afirma enxergar, se o que ele deriva do corpus descreve o gênero de uma trilha em particular, e se o que ele entrega ao autor decorre dessa derivação. Respondidas afirmativamente, estabelecem a validade interna necessária para que a avaliação de utilidade com autores, descrita na Seção~\ref{sec:utilidade-futura}, produza percepções atribuíveis a alguma camada do sistema. Respondidas negativamente, indicam qual camada revisar antes de prosseguir.
+% % \textbf{Anotador único.} As anotações de referência dos dois agentes são produzidas pelo pesquisador, o que implica ausência de medida de concordância e risco de viés na direção do comportamento esperado do extrator. Mitiga-se fixando os protocolos de anotação antes da inspeção dos resultados do modelo e reportando o padrão de erro em lugar de acurácia absoluta.
+
+% % \textbf{Ausência de validação por especialistas.} A pertinência das regras de gênero não é submetida a revisores experientes da trilha, o que impede detectar regras que a comunidade reconheça e o corpus não revele. O Nível 2 do agente de conformidade atesta que as regras descrevem o corpus e discriminam entre trilhas, não que sejam exaustivas.
+
+% % \textbf{Viés de sobrevivência no agente de conformidade.} O corpus desse agente contém apenas artigos aceitos. A validação por retenção estabelece que a especificação é compatível com textos aprovados, não que a não conformidade implique rejeição. A fronteira entre aceitação e recusa é medida pelo agente de fronteira, e apenas por ele.
+
+% \textbf{Deslocamento de domínio no agente de fronteira.} O gabarito do agente de fronteira provém do ReviewArena, cujas avaliações são de conferências internacionais de aprendizado de máquina e processamento de linguagem natural. O poder discriminante medido no Nível 2 refere-se a essas comunidades. Nenhum resultado deste capítulo autoriza afirmar que o agente discrimina aceitos de rejeitados em uma trilha brasileira, o que exigiria um corpus de avaliações brasileiras. A avaliação demonstra o mecanismo, não sua transferência ao contexto-alvo.
+
+% \textbf{Regra de predição.} A conversão do retorno de risco em predição binária depende de uma regra fixada pelo pesquisador. Regras distintas produzem métricas distintas. Mitiga-se fixando a regra antes da execução e reportando a sensibilidade das métricas a variações dessa regra, do mesmo modo que se reporta a sensibilidade aos limiares no agente de conformidade.
+
+% \textbf{Dependência entre níveis.} Erros sistemáticos de extração, em qualquer dos agentes, propagam-se às camadas superiores e podem produzir resultados internamente consistentes e substantivamente equivocados. A caracterização do erro obtida no Nível 1 de cada agente deve acompanhar a leitura dos demais níveis.
+
+% \textbf{Uma edição por trilha.} As especificações de gênero derivam de uma única edição de cada evento. Regularidades próprias daquela edição não se distinguem de regularidades estáveis da trilha, e o contraste entre trilhas atenua apenas parcialmente a limitação, uma vez que ambas as trilhas do ENIAC provêm da mesma edição.
+
+% \textbf{Alcance das alegações.} Os procedimentos operam sobre uma trilha-alvo, uma língua e uma comunidade, com o agente de fronteira avaliado em comunidades distintas da alvo. Não se sustenta alegação de generalidade a outros gêneros acadêmicos, a outras comunidades científicas ou a outros idiomas.
+
+
+% \section{Síntese}
+% \label{sec:sintese-avaliacao}
+
+% A avaliação responde a quatro perguntas encadeadas. Para o agente de conformidade, se ele enxerga no texto o que afirma enxergar e se o que deriva do corpus descreve o gênero de uma trilha em particular. Para o agente de fronteira, se os motivos de recusa que extrai correspondem aos que os revisores apontaram, se o retorno de risco distingue artigos aceitos de rejeitados, e se a análise de conformidade contribui para essa distinção. Respondidas afirmativamente, estabelecem a validade interna de cada agente e a complementaridade entre eles, condição para que a avaliação de utilidade com autores produza percepções atribuíveis a alguma camada do sistema. Respondidas negativamente, indicam qual camada revisar antes de prosseguir.

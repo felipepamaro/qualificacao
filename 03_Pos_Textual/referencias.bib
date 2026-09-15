@@ -489,3 +489,82 @@ abstract = {Stakeholders might have diverging or conflicting expectations about 
 year = {2021}
 }
 
+@inproceedings{ReviewArena,
+title={ReviewArena: A Large-Scale Cross-Conference Dataset and Benchmark for {LLM} Peer Review},
+author={Samarth P and Motamarri Sai Sathvik and Vyoman Jain and Shiva Golugula},
+booktitle={ICML 2026 AI for Science Workshop},
+year={2026},
+url={https://icml.cc/virtual/2026/73438}
+}
+
+@inproceedings{PeerRead2018,
+    title = "A Dataset of Peer Reviews ({P}eer{R}ead): Collection, Insights and {NLP} Applications",
+    author = "Kang, Dongyeop  and
+      Ammar, Waleed  and
+      Dalvi, Bhavana  and
+      van Zuylen, Madeleine  and
+      Kohlmeier, Sebastian  and
+      Hovy, Eduard  and
+      Schwartz, Roy",
+    editor = "Walker, Marilyn  and
+      Ji, Heng  and
+      Stent, Amanda",
+    booktitle = "Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers)",
+    month = jun,
+    year = "2018",
+    address = "New Orleans, Louisiana",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/N18-1149/",
+    doi = "10.18653/v1/N18-1149",
+    pages = "1647--1661"
+}
+
+
+
+
+
+% ---------------------------------------------------------------
+% Referencias para amarrar a escolha do grafo de conhecimento (C4)
+% ---------------------------------------------------------------
+
+% 1) Roadmap LLM + KG. Periodico de ponta (IEEE TKDE). Sustenta que o KG
+%    fornece ao LLM conhecimento externo com interpretabilidade.
+@article{PanKGLLM2024,
+  title   = {Unifying Large Language Models and Knowledge Graphs: A Roadmap},
+  author  = {Pan, Shirui and Luo, Linhao and Wang, Yufei and Chen, Chen and Wang, Jiapu and Wu, Xindong},
+  journal = {IEEE Transactions on Knowledge and Data Engineering},
+  volume  = {36},
+  number  = {7},
+  pages   = {3580--3599},
+  year    = {2024},
+  doi     = {10.1109/TKDE.2024.3352100}
+}
+
+% 2) Survey de GraphRAG. Publicado na ACM Transactions on Information
+%    Systems (vol. 44, n. 2). E a referencia que sustenta grafo em vez de
+%    recuperacao vetorial: estrutura relacional permite recuperacao mais
+%    precisa e captura de conhecimento relacional.
+%    TODO conferir na pagina da ACM o ano e as paginas (acesso bloqueado
+%    para leitura automatizada; DOI e volume/numero confirmados).
+@article{PengGraphRAG,
+  title   = {Graph Retrieval-Augmented Generation: A Survey},
+  author  = {Peng, Boci and Zhu, Yun and Liu, Yongchao and Bo, Xiaohe and Shi, Haizhou and Hong, Chuntao and Zhang, Yan and Tang, Siliang},
+  journal = {ACM Transactions on Information Systems},
+  volume  = {44},
+  number  = {2},
+  year    = {2026},
+  doi     = {10.1145/3777378}
+}
+
+% 3) GraphRAG (Microsoft). Trabalho seminal, preprint arXiv. Mostra
+%    ganhos sobre RAG vetorial e o uso do LLM para construir o grafo a
+%    partir dos documentos, que e exatamente o Fluxo A do agente de fronteira.
+@misc{EdgeGraphRAG2024,
+  title         = {From Local to Global: A Graph {RAG} Approach to Query-Focused Summarization},
+  author        = {Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan},
+  year          = {2024},
+  eprint        = {2404.16130},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2404.16130}
+}
