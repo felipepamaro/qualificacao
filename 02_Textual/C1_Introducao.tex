@@ -1,48 +1,43 @@
 \chapter{Introdução}\label{chap:introducao}
 
 
-A produção científica brasileira cresceu de forma expressiva nos últimos cinco anos: entre 2021 e 2025, o número de artigos publicados em anais da SBC \cite{solsbc} passou de 1.430 para 2.590 (Apêndice~\ref{apen:appendix_A}), um crescimento de aproximadamente 81\%. Esses trabalhos correspondem a aproximadamente 45,41\% dos artigos submetidos (Apêndice~\ref{apen:appendix_B}), o que evidencia uma taxa de rejeição elevada e expõe desafios estruturais do sistema de revisão por pares, entre eles a sobrecarga de revisores e a extensão dos ciclos editoriais. Tais fatores afetam a eficiência do processo científico e a formação de novos pesquisadores, que muitas vezes enfrentam dificuldades para obter retorno estruturado e acionável sobre seus trabalhos diante do alto volume de submissões a revisar.
+A produção científica brasileira cresceu de forma expressiva nos últimos cinco anos: entre 2021 e 2025, o número de artigos publicados em anais da SBC \cite{solsbc} passou de 1.430 para 2.590 (Apêndice~\ref{apen:appendix_A}), um crescimento de aproximadamente 81\%. Esses trabalhos correspondem a aproximadamente 45,41\% dos artigos submetidos (Apêndice~\ref{apen:appendix_A}), indicando um cenário de elevada seletividade e colocando pressão sobre o processo de revisão por pares. Esse contexto afeta a eficiência do processo científico e a formação de novos pesquisadores, que muitas vezes enfrentam dificuldades para obter retorno estruturado e acionável sobre seus trabalhos diante do alto volume de submissões a revisar.
 
-A revisão por pares é também um espaço de aprendizado. Comentários de autores costumam registrar que o processo ajuda a aprimorar o artigo, mantém os autores atentos e constitui uma experiência formativa importante, ainda que difícil \cite{Bravo2017}.
+A revisão por pares é também um espaço de aprendizado. Comentários de autores costumam registrar que o processo ajuda a aprimorar o artigo, mantém os autores atentos e constitui uma experiência formativa importante, ainda que difícil \cite{Bravo2017}. Neste aspecto, o \textit{feedback} produzido durante a revisão não apenas orienta a melhoria do manuscrito, mas também pode contribuir para a formação de pesquisadores que ainda estão desenvolvendo familiaridade com as práticas de uma comunidade científica.
 
-Nesse cenário, os modelos de linguagem de grande escala (LLM\nomenclature{LLM}{Large Language Model}) representam um avanço significativo no campo da inteligência artificial, com desempenho de ponta em uma ampla gama de tarefas de linguagem natural, da tradução à resposta a perguntas, da redação de textos coerentes à geração de programas \cite{Kasneci2023}. O uso desses modelos na educação tem sido apontado como área de interesse relevante, pela variedade de aplicações que oferece e pelo potencial de aprimorar experiências de ensino e aprendizagem em diferentes níveis \cite{Kasneci2023}. Ao aproveitar as capacidades colaborativas e especializadas de múltiplos agentes, os sistemas multiagente baseados em LLM (LMA\nomenclature{LMA}{LLM-based Multi-Agent}) possibilitam a resolução autônoma de problemas, aumentam a robustez e oferecem soluções escaláveis para lidar com a complexidade de tarefas do mundo real \cite{He2025}.
+Nesse cenário, os modelos de linguagem de grande escala (LLM\nomenclature{LLM}{Large Language Model}) representam um avanço significativo no campo da inteligência artificial, com desempenho de ponta em uma ampla gama de tarefas de linguagem natural, da tradução à resposta a perguntas, da redação de textos coerentes à geração de programas \cite{Kasneci2023}. O uso desses modelos na educação tem sido apontado como área de interesse relevante, pela variedade de aplicações que oferece e pelo potencial de aprimorar experiências de ensino e aprendizagem em diferentes níveis \cite{Kasneci2023}. Ao aproveitar as capacidades colaborativas e especializadas de múltiplos agentes, os sistemas multiagente baseados em LLM-based Multi-Agent (LMA\nomenclature{LMA}{LLM-based Multi-Agent}) possibilitam a resolução autônoma de problemas, aumentam a robustez e oferecem soluções escaláveis para lidar com a complexidade de tarefas do mundo real \cite{He2025}. 
 
-Essas tecnologias vêm sendo exploradas em diferentes etapas do ciclo científico, incluindo a análise de literatura, o apoio à escrita acadêmica e a própria avaliação de manuscritos. Sistemas baseados em IA já se mostraram capazes de produzir avaliações com níveis de concordância comparáveis aos de revisores humanos em determinados critérios \cite{AgentReview}, o que sugere potencial para apoiar o processo editorial e reduzir o tempo de iteração entre submissões.
+Essas tecnologias vêm sendo exploradas em diferentes etapas do ciclo científico, incluindo a análise de literatura, o apoio à escrita acadêmica e a própria avaliação de manuscritos. Sistemas baseados em IA já se mostraram capazes de produzir avaliações com níveis de concordância comparáveis aos de revisores humanos em determinados critérios \cite{AgentReview}, o que sugere potencial para apoiar atividades de avaliação e \textit{feedback} no processo científico.
 
-Este trabalho parte de um desenho de pesquisa apresentado no Simpósio Brasileiro de Sistemas de Informação (SBSI\nomenclature{SBSI}{Simpósio Brasileiro de Sistemas de Informação}) \cite{Amaro}, que propôs uma arquitetura multiagente para apoio à avaliação científica em conferências brasileiras. A partir das contribuições recebidas naquele fórum, o escopo é aprofundado em duas direções complementares. A primeira é a mudança do alvo de avaliação: em vez de confrontar o manuscrito com critérios universais de qualidade, o artefato passa a analisá-lo em relação a uma trilha ou conferência determinada, tomada como referência de adequação. A segunda é a articulação entre a conformidade a esse alvo e os motivos recorrentes de rejeição observados em avaliações reais, de modo a cobrir aspectos que a conformidade de gênero, isoladamente, não alcança.
-
-Embora outras pesquisas \cite{DeepReview,MARG,AgentReview,AgentLaboratory} explorem o uso de modelos de linguagem na geração de \textit{feedback} acadêmico e na análise automatizada de artigos, a maioria dessas iniciativas concentra-se em conferências internacionais de áreas específicas do conhecimento e apoia-se em bases de revisões que não contemplam o contexto brasileiro. Cada comunidade científica, no entanto, consolida convenções próprias de escrita e de avaliação, que funcionam como um gênero reconhecível e nem sempre explícito aos autores iniciantes \cite{GenresOrgComm}. Ainda há pouca investigação sobre como artefatos de IA podem ser projetados e avaliados para apoiar o processo editorial de conferências brasileiras.
-
-Nesse contexto, surge a oportunidade de investigar instrumentos de apoio à iniciação científica, não para substituir revisores humanos, mas para auxiliar pesquisadores iniciantes, ampliando a qualidade, a consistência e a escalabilidade da produção de artigos em conferências brasileiras. Esta pesquisa busca contribuir para esse debate ao propor e investigar um artefato voltado à análise de artigos científicos, com foco no contexto brasileiro e na qualificação da produção científica nacional.
-
-% \section{Contexto}
-
-% O sistema de comunicação científica brasileiro apresenta características próprias que influenciam o processo de avaliação. Veículos nacionais frequentemente operam com recursos editoriais limitados, dependem de redes restritas de revisores e enfrentam dificuldades para acompanhar o crescimento das submissões. As consequências são a demora na tramitação, a heterogeneidade dos pareceres e a escassez de \textit{feedback} estruturado aos autores. 
-
-% Esses desafios impactam de maneira significativa pesquisadores em início de carreira, que dependem do processo de revisão como espaço de aprendizado e aprimoramento metodológico. Além disso, a limitação de ferramentas automatizadas de apoio à revisão científica reduz a capacidade de editores de realizar triagens eficientes e dificulta a identificação precoce de problemas metodológicos ou lacunas na contextualização dos trabalhos.
+Embora pesquisas recentes \cite{DeepReview,MARG,AgentReview,AgentLaboratory} explorem o uso de modelos de linguagem na geração de \textit{feedback} acadêmico e na análise automatizada de artigos, a maioria dessas iniciativas concentra-se em conferências internacionais de áreas específicas do conhecimento e apoia-se em bases de revisões que não contemplam o contexto brasileiro. Porém, essas abordagens não têm como foco a modelagem das convenções específicas de uma comunidade científica ou de uma trilha de conferência como referência para a orientação da escrita. Cada comunidade científica, no entanto, consolida convenções próprias de escrita e de avaliação, que funcionam como um gênero reconhecível e nem sempre explícito aos autores iniciantes \cite{GenresOrgComm}, e estas convenções são aprendidas, em grande parte, pela experiência e pela interação com a comunidade.  Ainda há pouca investigação sobre como essas convenções podem ser modeladas computacionalmente e utilizadas por artefatos de IA para apoiar autores antes da submissão.
 
 
-% Embora pesquisas recentes explorem o uso de modelos de linguagem na geração de \textit{feedback} acadêmico e na análise automatizada de artigos, a maioria dessas iniciativas concentra-se em conferências internacionais ou em áreas específicas do conhecimento. Ainda há pouca investigação sobre como artefatos de IA podem ser projetadas e avaliadas para apoiar o processo editorial brasileiro, considerando suas especificidades organizacionais e sociotécnicas.
+% Este trabalho parte de um desenho de pesquisa apresentado no Simpósio Brasileiro de Sistemas de Informação (SBSI\nomenclature{SBSI}{Simpósio Brasileiro de Sistemas de Informação}) \cite{Amaro}, que propôs uma arquitetura multiagente para apoio à avaliação científica em conferências brasileiras. A partir das contribuições recebidas naquele fórum, o escopo é aprofundado em duas direções complementares. A primeira é a mudança do alvo de avaliação: em vez de confrontar o manuscrito com critérios universais de qualidade, o artefato passa a analisá-lo em relação a uma trilha ou conferência determinada, tomada como referência de adequação. A segunda é a articulação entre a conformidade a esse alvo e os motivos recorrentes de rejeição observados em avaliações reais, de modo a cobrir aspectos que a conformidade de gênero, isoladamente, não alcança.
 
+% Cada comunidade científica consolida convenções próprias de escrita e de avaliação, que funcionam como um gênero reconhecível, embora nem sempre sejam explícitas para autores iniciantes \cite{GenresOrgComm}. Essas convenções orientam a forma como os pesquisadores estruturam e apresentam seus trabalhos em diferentes contextos científicos e são aprendidas, em grande parte, pela experiência e pela interação com a comunidade. 
 
+Parte desse conhecimento pode ser observada nos artigos já aceitos por uma comunidade e é adquirida gradualmente por meio da experiência, tentativa e erro e pouco tempo para novas tentativas devido ao fato de convenções, em sua maioria, só permitirem submissões uma vez por ano. Para autores em início de carreira, estas características podem dificultar a identificação do que é esperado em uma determinada conferência ou trilha, dada a necessidade de analisar múltiplos artigos aceitos para inferir padrões e convenções.
 
-% \begin{figure}[htb!]
-% \centering
-% \caption{Modern separation between the poles of nature and culture.}
-% \includegraphics[width=0.8\textwidth]{FIGURAS/FIGURA_PARA_TEMPLATE.jpg}
-% \caption{\textbf{Source:} Adapted from \citeonline[p.~39]{latour2012we}}
-% \label{fig:polos}
-% \end{figure}
-
+Nesse contexto, surge a oportunidade de investigar instrumentos de apoio à iniciação científica, na hipótese de que as convenções de escrita e de avaliação de uma comunidade científica podem ser identificadas, sistematizadas e representadas computacionalmente. Sem a pretensão de substituir revisores humanos, mas para auxiliar pesquisadores iniciantes, ampliando a qualidade, a consistência e a escalabilidade da produção de artigos em conferências brasileiras. Esta pesquisa busca contribuir para esse debate ao propor e investigar um artefato voltado à análise de artigos científicos, com foco no contexto brasileiro e na qualificação da produção científica nacional.
 
 
 \section{Motivação}
 
+Considerando as conferências que divulgaram informações sobre o número de submissões, foram coletados, para o período de 2021 a 2025, os quantitativos de artigos submetidos, aceitos e rejeitados representados na Figura \ref{fig:rejeitados}. Os dados evidenciam um crescimento no volume de submissões ao longo do período, acompanhado também pelo aumento do número de artigos rejeitados. Em 2025, foram registrados 1.768 artigos aceitos e 2.295 rejeitados, frente a 709 aceitos e 781 rejeitados em 2021. Esse cenário evidencia o aumento da quantidade de trabalhos submetidos à avaliação e reforça a relevância de investigar formas de apoiar os autores na preparação de seus manuscritos antes da submissão.
 
-A rejeição editorial precoce, conhecida como desk rejection, consiste na recusa de um manuscrito antes de seu envio à revisão por pares, com base em uma triagem inicial realizada pelos editores. A literatura indica que, nessa etapa, a rejeição costuma decorrer menos de falhas científicas absolutas do que de problemas de adequação editorial, como desalinhamento com o escopo do veículo, ausência de novidade percebida, descumprimento de diretrizes formais, fragilidade na apresentação do argumento e insuficiente explicitação de contribuição, método ou relevância para a audiência visada \cite{Dwivedi2022,Severin2021}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{FIGURAS/IMG/grafico_aceitos_rejeitados_2021_2025.png}
+    \caption{Relação de artigos aceitos e rejeitados em conferências brasileiras, 2021-2025.}
+    \label{fig:rejeitados}
+\end{figure}
+
+Os dados apresentados na Figura~\ref{fig:rejeitados} não informam os motivos das rejeições, pois as conferências analisadas não divulgam essas informações, não sendo possível identificar o real motivo. Entretanto, parte pode ter ocorrido pelo que a literatura chama de \textit{desk rejection}.
+
+A rejeição editorial precoce, conhecida como \textit{desk rejection}, consiste na recusa de um manuscrito antes de seu envio à revisão por pares, com base em uma triagem inicial realizada pelos editores. A literatura indica que, nessa etapa, a rejeição costuma decorrer menos de falhas científicas absolutas do que de problemas de adequação editorial, como desalinhamento com o escopo do veículo, ausência de novidade percebida, descumprimento de diretrizes formais, fragilidade na apresentação do argumento e insuficiente explicitação de contribuição, método ou relevância para a audiência visada \cite{Dwivedi2022,Severin2021}.
 
 
-Ou seja, mesmo um trabalho metodologicamente sólido pode ser rejeitado na triagem inicial quando não corresponde ao tipo de manuscrito, enquadramento ou conversa científica que aquele periódico ou trilha procura publicar. A consequência é que autores em início de carreira, que ainda não internalizaram as convenções de escrita e avaliação de uma comunidade científica, podem enfrentar dificuldades para obter retorno estruturado e acionável sobre seus trabalhos, o que impacta negativamente sua formação e a qualidade da produção científica.
+Ou seja, mesmo um trabalho metodologicamente sólido pode ser rejeitado na triagem inicial quando não corresponde ao tipo de manuscrito ou enquadramento científica que aquele periódico ou trilha procura publicar. A consequência é que autores em início de carreira, que ainda não internalizaram as convenções de escrita e avaliação de uma comunidade científica, podem enfrentar dificuldades para obter retorno estruturado e acionável sobre seus trabalhos, o que impacta negativamente sua formação e a qualidade da produção científica.
 
 O \textit{desk rejection} de artigos submetidos pode ser um processo extremamente frustrante e desmotivador para o pesquisador, mas, igualmente, uma etapa vital e demorada para o editor, responsável por selecionar os artigos adequados que atendam aos critérios necessários para revisão e análise mais aprofundadas \cite{Dwivedi2022}.
 
@@ -52,63 +47,54 @@ O conhecimento que constitui um artigo bem-formado para determinada comunidade �
 
 \section{Problema e questão de pesquisa}
 
-Identifica-se, assim, uma lacuna relacionada à compreensão de como modelos de IA podem ser estruturados para produzir avaliações contextualizadas ao gênero de uma comunidade científica, úteis à formação de novos pesquisadores. O problema de pesquisa consiste em investigar como modelar computacionalmente as convenções de gênero de uma trilha de uma conferência e utilizá-las para orientar autores a escrever de acordo com as normas da comunidade e de acordo com o a forma da trilha, no objetivo de reduzir a rejeição editorial precoce.
+A lacuna investigada neste trabalho está na ausência de métodos que permitam derivar, formalizar e operacionalizar computacionalmente as convenções de gênero específicas de uma trilha de conferência a partir de evidências produzidas pela própria comunidade científica. Embora existam sistemas baseados em IA para análise e avaliação de manuscritos, permanece pouco explorado como essas tecnologias podem incorporar as convenções que caracterizam o gênero de uma comunidade e utilizá-las para orientar autores.
 
-Assim, o problema de pesquisa deste trabalho consiste em investigar como arquiteturas baseadas em IA podem apoiar a avaliação sistemática de artigos científicos e contribuir para orientar novos pesquisadores e elevar a qualidade das publicações em que irão ser submetidas em periódicos brasileiros, evitando assim o \textit{desk rejection}.
-Identifica-se, assim, uma lacuna relacionada à compreensão de como agentes de IA podem ser estruturados para produzir avaliações contextualizadas ao gênero de uma comunidade científica, úteis à formação de novos pesquisadores. O problema de pesquisa deste trabalho consiste em investigar como modelar computacionalmente as convenções de gênero de uma trilha de conferência, a partir do corpus de artigos aceitos, e utilizá-las para orientar autores em início de carreira a adequar seus manuscritos à forma esperada pela comunidade.
+O problema de pesquisa consiste em investigar como as convenções de gênero de uma trilha de conferência podem ser modeladas computacionalmente a partir de um corpus de artigos aceitos e utilizadas para produzir orientações acionáveis que auxiliem autores na adequação de seus manuscritos ao gênero modelado. O corpus funciona como evidência empírica das formas recorrentes de organização e apresentação dos trabalhos, que podem ser analisadas, sistematizadas e convertidas em regras de conformidade. E a representação destes regras passa a constituir uma base de conhecimento utilizada pelo artefato para analisar novos manuscritos e produzir orientações acionáveis.
+
+Embora modelos de LLM já sejam empregados em tarefas de análise, geração e avaliação de textos científicos, permanece pouco explorada a utilização desses modelos para representar e verificar as convenções de gênero específicas de uma comunidade científica. Os trabalhos existentes analisam diferentes dimensões dos manuscritos, como qualidade, clareza, novidade, contribuição e outros critérios de avaliação, e este trabalho investiga uma questão distinta: verificar se um manuscrito apresenta as características esperadas pelo gênero comunicativo de uma determinada trilha de conferência.
 
 A questão de pesquisa que orienta o estudo é:
 
-% \begin{quotation}
-% \noindent Modelos de IA podem contribuir para a redução da rejeição editorial a partir do corpus de artigos aceitos, e utilizá-las para produzir orientação acionável que apoie autores em início de carreira e reduza a incidência de rejeição editorial precoce?
-% \noindent Um artefato baseado em agentes de IA pode modelar as convenções de gênero de uma trilha de conferência, a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
-% \end{quotation}
-
-% Em que medida agentes de IA podem modelar regras de gênero a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
-
 \begin{quotation}
-\noindent Em que medida é modelar regras de gênero a partir de um corpus de artigos aceitos em trilha de uma conferência e produzir orientação acionável que apoie autores a produzir manuscritos alinhados às expectativas da comunidade?
-% \noindent Um artefato baseado em agentes de IA pode modelar as convenções de gênero de uma trilha de conferência, a partir do corpus de artigos aceitos, e produzir orientação acionável que apoie autores em início de carreira a adequar seus manuscritos a esse gênero?
+\noindent \textbf{Em que medida a modelagem computacional das convenções de gênero de uma trilha de conferência, derivadas de um corpus de artigos aceitos, permite gerar orientações acionáveis para apoiar autores na adequação de seus manuscritos ao gênero modelado?}
 \end{quotation}
+
+A proposta não se restringe, contudo, à verificação da conformidade do manuscrito com as convenções de gênero. Embora essa análise permita identificar se o texto apresenta características esperadas por uma determinada trilha, ela pode não se mostrar suficiente para representar a diversidade de problemas que podem estar associados à avaliação e à rejeição de artigos científicos. De forma complementar, a arquitetura proposta introduz um segundo agente, baseado em uma base de dados de revisões de artigos rejeitados, destinado a identificar problemas e motivos de rejeição recorrentes observados em artigos semelhantes. Enquanto o primeiro agente toma como referência o gênero específico da trilha, o segundo utiliza evidências de avaliações reais para reconhecer padrões de problemas recorrentes. A combinação dessas duas perspectivas permite ampliar o diagnóstico oferecido ao autor.
+
 
 \section{Objetivos}
 
-% O objetivo geral é projetar, construir e avaliar um artefato de software, baseado em modelos de IA que modele o gênero de uma trilha de conferência e verifique a conformidade de manuscritos a esse gênero, gerando orientação formativa. Como objetivos específicos, definem-se: 
-O objetivo geral é projetar, construir e avaliar um artefato de software que modele o gênero de uma trilha de conferência, verifique a conformidade de manuscritos a esse gênero e o articule aos motivos recorrentes de rejeição observados em avaliações reais, de modo a gerar orientação formativa a pesquisadores iniciantes. Como objetivos específicos, definem-se:
+Projetar, construir e avaliar um artefato de software baseado em agentes de IA capaz de modelar computacionalmente as convenções de gênero de uma trilha de conferência, a partir de um corpus de artigos aceitos, e utilizar essa representação para diagnosticar a conformidade de manuscritos e produzir orientações acionáveis para autores em início de carreira.
 
-\begin{itemize}
-    \item[(i)] formular uma fundamentação teórica que articule a Teoria de Gêneros \cite{GenresOrgComm} e a análise de \textit{moves} retóricos \cite{GenreAnalysis} no âmbito do método \textit{Design Science Research} (DSR\nomenclature{DSR}{Design Science Research}) \cite{Hevner2004};
-    \item[(ii)] definir e implementar um método para extrair, a partir de um corpus de uma conferência, a especificação de gênero de cada trilha;
-    \item[(iii)] implementar o protótipo do agente de conformidade de gênero aplicado a conferências brasileiras públicas na SBC Open Library (SOL\nomenclature{SOL}{SBC Open Library}) \cite{solsbc}, integrando modelos locais e comerciais;
-    \item[(iv)] avaliar empiricamente esse agente quanto à utilidade percebida e à validade dos diagnósticos de conformidade;
-    \item[(v)] projetar um segundo agente, orientado à identificação de motivos recorrentes de rejeição a partir de avaliações reais, e especificar as condições para sua implementação e avaliação futuras, incluindo a constituição de um corpus de avaliações de artigos rejeitados.
-\end{itemize}
+Para investigar essa questão, será desenvolvido e avaliado, segundo os princípios da \textit{Design Science Research} (DSR\nomenclature{DSR}{Design Science Research}) \cite{Hevner2004}, um artefato de software baseado em agentes de IA. O artefato deverá utilizar a representação de gênero derivada do corpus para analisar manuscritos submetidos pelo autor, identificar sua conformidade em relação às convenções modeladas e produzir orientações formativas e acionáveis.
 
-% \section{Objetivos}
+Para alcançar o objetivo geral, são estabelecidos os seguintes objetivos específicos:
 
-% O objetivo geral é projetar, construir e avaliar um artefato de software, baseado em agentes de IA que modele o gênero de uma trilha de conferência e verifique a conformidade de manuscritos a esse gênero, gerando orientação formativa. Como objetivos específicos, definem-se: 
+\begin{enumerate}
+    \item estabelecer uma fundamentação teórica que articule a Teoria de Gêneros \cite{GenresOrgComm} e a análise de \textit{moves} retóricos \cite{GenreAnalysis} no âmbito do método \textit{Design Science Research} (DSR\nomenclature{DSR}{Design Science Research}) \cite{Hevner2004};
 
-% \begin{itemize}
-%     \item (i) formular uma fundamentação teórica que articule a Teoria de Gêneros \cite{GenresOrgComm}, a análise de moves retóricos \cite{GenreAnalysis} sob o método DSR\nomenclature{DSR}{Design Science Research} \cite{Hevner2004}.
-%     \item (ii) definir e implementar um método eficiente para extrair, a partir de um corpus de uma conferência, a especificação de gênero de cada trilha
-%     \item (iii) implementar o protótipo aplicado a conferências Brasileiras publicas no SOL\nomenclature{SOL}{SBC Open Library} (SBC OpenLib) \cite{solsbc}, integrando modelos locais e comerciais.
-%     \item (iv) avaliar empiricamente o artefato quanto à utilidade percebida, à validade dos diagnósticos e à concordância com avaliadores humanos.
-% \end{itemize}
+    \item definir e implementar um método para extrair, a partir de um corpus de uma conferência, a especificação de gênero de cada trilha;
 
+    \item implementar o protótipo do agente de conformidade de gênero aplicado a um corpus de artigos aceitos em uma trilha de conferência;
 
+    \item avaliar empiricamente esse agente quanto à utilidade percebida e à validade dos diagnósticos de conformidade
+
+    \item analisar a capacidade do procedimento de modelagem de distinguir convenções específicas de diferentes trilhas e comunidades científicas, verificando se a trilha constitui uma unidade de análise adequada para a representação computacional do gênero;
+
+    \item especificar uma extensão do artefato para identificação de motivos recorrentes de rejeição a partir de avaliações reais.
+\end{enumerate}
+
+Em conjunto, os objetivos estabelecem uma sequência de investigação que parte da fundamentação teórica e da definição dos construtos, passa pela derivação de uma especificação de gênero a partir de evidências empíricas, materializa essa especificação em um artefato baseado em agentes de IA e culmina na avaliação de sua capacidade de produzir diagnósticos válidos e orientações úteis. 
 
 
 \section{Contribuições esperadas}
 
-Esperam-se três contribuições.
-\begin{itemize}
-    \item A primeira, \textbf{técnica}, é o próprio artefato e o método de consolidação do corpus de uma conferência em uma base de conhecimento de gênero por trilha, aplicável a outras conferências que publiquem seus anais de forma aberta.
+Espera-se, como resultado da pesquisa, a obtenção de um artefato capaz de apoiar a preparação de manuscritos científicos por meio de duas perspectivas complementares.
 
-    \item A segunda, \textbf{aplicada}, é evidência empírica sobre a capacidade do artefato de diagnosticar a conformidade de manuscritos e sobre a percepção de utilidade por autores em formação, no contexto de conferências brasileiras.
+O primeiro resultado esperado é a construção de uma especificação computacional do gênero de diferentes trilhas de conferências, derivada de seus artigos aceitos, e de um agente capaz de verificar a conformidade de novos manuscritos com essa especificação. Espera-se que a avaliação demonstre a validade dos diagnósticos produzidos e permita identificar diferenças entre as convenções das trilhas analisadas.
 
-    \item A terceira, \textbf{teórica e metodológica}, é a caracterização das convenções de escrita de uma comunidade científica como um gênero \cite{GenresOrgComm} operacionalizável por um artefato, acompanhada da constatação de que não há, atualmente, conjuntos públicos de avaliações de artigos rejeitados no contexto brasileiro, o que fundamenta o desenho em duas fases e a proposta de constituição desse corpus como trabalho futuro.
-\end{itemize}
+O segundo resultado esperado é a construção de um agente de fronteira de rejeição, baseado em uma base de avaliações reais, capaz de identificar problemas e motivos recorrentes de rejeição e utilizá-los como evidências complementares à análise de conformidade de gênero. A avaliação desse componente deverá considerar as limitações decorrentes da utilização de uma base internacional, na ausência de um corpus público brasileiro de avaliações de artigos rejeitados que está sendo constituído como trabalho futuro. 
 
-% \section{Organização do documento}
+Espera-se, ainda, que o procedimento desenvolvido para derivar as especificações de gênero possa ser aplicado a outras trilhas e conferências que disponibilizem seus artigos, mantendo a arquitetura geral do artefato. Como resultado científico, pretende-se produzir evidências sobre a viabilidade de operacionalizar computacionalmente convenções de gênero de comunidades científicas e utilizá-las, em conjunto com evidências de avaliações anteriores, para gerar orientação aos autores.
 
-% O Capítulo 2 apresenta a fundamentação teórica. O Capítulo 3 discute os trabalhos relacionados. O Capítulo 4 formula a solução proposta como uma teoria de design. O Capítulo 5 detalha o método de construção do artefato. O Capítulo 6 descreve o método de avaliação. O Capítulo 7 apresenta o cronograma e os resultados esperados. O Capítulo 8 traz as considerações parciais.
+Por fim, espera-se que o artefato contribua para a formação de pesquisadores em início de carreira, oferecendo diagnósticos e orientações que ampliem a compreensão das convenções de escrita promovendo um aprendizado mais estruturado e consistente, e que a avaliação do artefato forneça evidências sobre sua utilidade percebida pelos autores.
